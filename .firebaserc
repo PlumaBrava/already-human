@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "already-human"
+    "default": "already-human",
+    "ignatest": "ignatest-c4444"
   }
 }
