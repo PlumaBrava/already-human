@@ -1,0 +1,184 @@
+#pag{text-align: center;}
+#container{justify-content: center;}
+#pagewrap {
+    vertical-align: top;
+    height: 100%;
+    width: 100%;
+    max-width: 1024px;
+    padding: 0px;
+    margin: 0 0 auto;
+    position:absolute;
+    background-color:#ffffff;
+    }
+#uno {
+margin-right: 50%;
+margin-top: 40px;
+width:100%;
+height: 194px;
+display:block;
+margin: 0px 0px inherit;
+position:absolute;
+    z-index: 2;
+}
+#already {
+margin: 0px 0px inherit;
+position:absolute;
+}#igna {
+margin: 0px 0px inherit;
+position:absolute;
+    z-index: 1;
+}
+#stuff {
+margin-top: 35%;
+    margin-left: 30%;
+    width: 40px;
+    display: block;
+position:absolute;
+    align-content: center;
+    z-index: 2;
+}
+.st {
+    position:relative;
+    margin-right: 50%;
+  max-width: 40px ;
+  height: auto;
+}
+#li {font-family: "Lora", sans-serif;
+    font-size: 12px;
+margin-top: 12%;
+position:absolute; margin-left: 85%;
+    z-index: 10;
+}
+
+#boo {
+margin-left: 30%;
+margin-top: 40%;
+    align-content: center;
+height: 194px;
+display:block;
+position:relative;
+    z-index: 3;
+}
+#discos {font-family: "Lora", sans-serif;
+    font-size: 14px;
+position:relative;
+    z-index: 40;
+float: left;
+    padding-bottom: 40px;
+}
+#d1 {
+    display: block;
+margin: 0px 0px inherit;
+
+position:relative;
+    margin-left: 140px;
+}
+#t1 {font-family: "Lora", sans-serif;
+    text-align: left;
+    font-size:12px;
+    display: block;
+margin: 0px 0px inherit;
+position:absolute;
+    width: 140px;
+
+}
+.a1 {width: 70%;
+    position:relative;
+    margin-right: 40%;
+  max-width: 200px;
+    min-width: 130px;
+  height: auto;
+}
+
+
+
+
+#singles {font-family: "Lora", sans-serif;
+    font-size: 14px;
+position:relative;
+    z-index: 40;
+    width: 150px;
+    float: left;
+    padding-bottom: 40px;
+
+
+}
+#sin1 {
+    display: block;
+margin: 0px 0px inherit;
+
+position:relative;
+}
+#s1 {font-family: "Lora", sans-serif;
+    text-align: left;
+    font-size:12px;
+    display: block;
+margin: 0px 0px inherit;
+position:relative;
+    width: 100px;
+    float: left;
+
+}
+.j1 {width: 70%;
+    position:relative;
+    margin-right: 10%;
+  max-width: 100px;
+  height: auto;
+    float: left;
+}
+
+
+#singles2 {font-family: "Lora", sans-serif;
+    font-size: 14px;
+position:relative;
+    z-index: 40;
+    width: 120px;
+    float: left;
+
+}
+#sin2 {
+    display: block;
+margin: 0px 0px inherit;
+
+position:relative;
+}
+#s2 {font-family: "Lora", sans-serif;
+    text-align: left;
+    font-size:12px;
+    display: block;
+margin: 0px 0px inherit;
+position:relative;
+    width: 100px;
+    float: left;
+
+}
+.j2 {width: 80%;
+    position:relative;
+    margin-right: 10%;
+  max-width: 100px;
+  height: auto;
+    float: left;
+}
+
+
+
+
+
+.i3 {
+    position:relative;
+    margin-right: 50%;
+  max-width: 50%;
+  height: auto;
+}
+
+.i2 {
+
+    position:relative;margin-left: 50%;
+  max-width: 40%;
+  height: auto;
+}
+
+.ff {
+font-weight: bold;
+color: #000000;
+}

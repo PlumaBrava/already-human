@@ -14,12 +14,18 @@
     ]
   },
   "hosting": {
-    "public": "dist",
+    "public": "dist/already-human",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ] ,
+     "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      } ]
+
   },
   "storage": {
     "rules": "storage.rules"

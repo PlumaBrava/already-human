@@ -1,0 +1,117 @@
+<p>
+ Datos para la compra
+</p>
+<div id="singles2" routerLink="/datos/3">
+        <div id="sin2"><img class="j2" src="{{producto.imagen}}"></div>
+            <div id="s2">
+                <p>{{producto.name}}</p>
+            </div>
+        </div>
+
+
+
+<div class="row">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Tipo</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+        <button class="dropdown-item"  *ngFor="let alternativaProducto of producto.alternativaProducto "
+           (click)="setSeleccionProducto(alternativaProducto)"
+        >{{alternativaProducto}}</button>
+      <!-- <option *ngFor="let prod of ProductHeader">{{prod.name}} </option>   -->
+      </div>
+    </div>
+  </div>
+   <p>{{alternativaProductoElegido}}<p>
+  </div>
+
+ <div class="row">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Moneda</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic2" >
+        <button class="dropdown-item"  *ngFor="let alternativaMoneda of producto.alternativaMoneda" (click)="setSeleccionMoneda(alternativaMoneda)" >{{alternativaMoneda}}</button>
+      <!-- <option *ngFor="let prod of ProductHeader">{{prod.name}} </option>   -->
+      </div>
+    </div>
+  </div>
+   <p>{{alternativaMonedaElegida}}<p>
+  </div>
+
+
+            <div >
+                <p>{{precioSeleccionado}}</p>
+            </div>
+            <div >
+                <p>{{monedaSeleccionada}}</p>
+            </div>
+
+
+
+<div  style="width: 300px;" *ngIf="precioSeleccionado">
+  <form >
+
+ <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" required [(ngModel)]="compra.nombre" name="nombre">
+      <p>{{mensajeNombreNulo}}</p>
+    </div>
+
+     <div class="form-group">
+      <label for="pais">País</label>
+      <input type="text" class="form-control" id="pais" required [(ngModel)]="compra.pais" name="pais">
+
+    </div>
+
+    <div class="form-group">
+      <label for="mail">Mail</label>
+      <input type="email" class="form-control" id="mail" required [(ngModel)]="compra.mail" name="mail">
+      <p>{{mensajeMailNulo}}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmarMail">Confirmar Mail</label>
+      <input type="email" class="form-control" id="confirmarMail" required [(ngModel)]="confirmarMail" name="confirmarMail">
+            <p>{{mensajeConfirmarMail}}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="comentario">Comentario</label>
+      <input type="text" class="form-control" id="comentario" required [(ngModel)]="compra.comentario" name="comentario">
+    </div>
+
+<!-- <h3>Precios</h3> -->
+<!-- <div >
+  <a *ngFor="let oferta of producto.ofertas" class="oferta" >
+    <div class="">
+
+      <h4>{{oferta.titulo}}</h4>
+
+      <h4>{{oferta.moneda}}</h4>
+      <h4>{{oferta.precio}}</h4>
+      <h4>{{oferta.plataforma}}</h4>
+
+    </div>
+  </a>
+</div> -->
+
+<button  class="btn btn-success" (click)="verificarDatosCliente()" >Grabar</button>
+
+<!-- <app-paypal class="oferta" [precio]="precioSeleccionado"  [moneda]="monedaSeleccionada"></app-paypal> -->
+
+  </form>
+
+<!-- <div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <button class="btn btn-success" (click)="newCustomer()">Add</button>
+</div> -->
+
+<app-paypal class="oferta" [precio]="precioSeleccionado"  [moneda]="monedaSeleccionada" *ngIf="plataformaSeleccionada=='PayPal'" ></app-paypal>
+
+<!-- <a mp-mode="popup" href="https://www.mercadopago.com/mla/checkout/start?pref_id=19679536-4e66401f-8f8b-44b6-a711-75baaa84eb8b" name="MP-payButton" class="blue-ar-l-rn-aron" *ngIf="plataformaSeleccionada=='MP'" >Pagar</a> -->
+
+<a mp-mode="dftl" href={{linkSeleccionado}} name="MP-payButton" class='green-ar-l-rn-aron' *ngIf="plataformaSeleccionada=='MP'">Mercado Pago</a>
+
+<!-- <a mp-mode="dftl" href="https://www.mercadopago.com/mla/checkout/start?pref_id=19679536-4141cf4a-ab3b-4080-84e0-1ea175882996" name="MP-payButton" class='red-ar-l-rn-aron' *ngIf="plataformaSeleccionada=='MP'">S-Bahn</a> -->
+
+</div>
