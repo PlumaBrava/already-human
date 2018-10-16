@@ -10,9 +10,12 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "cors": "^2.8.4",
+    "curl-request": "^1.1.1",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.0.3",
-    "mercadopago": "^1.0.19"
+    "mercadopago": "^1.0.19",
+    "nodemailer": "^4.6.8"
   },
   "devDependencies": {
     "eslint": "^4.12.0",

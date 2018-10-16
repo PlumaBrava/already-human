@@ -7,8 +7,28 @@ import { AppRoutingModule } from './/app-routing.module';
 import { LandingComponent } from './landing/landing.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { environment } from '../environments/environment';
+import { LaflotaComponent } from './laflota/laflota.component';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
+
+
 import { AngularFireModule } from '@angular/fire';
+
+
+
+import { TrasaccionOkComponent } from './trasaccion-ok/trasaccion-ok.component';
+import { TrasaccionErrorComponent } from './trasaccion-error/trasaccion-error.component';
+
+
+import { HttpClientModule,HttpClientXsrfModule } from '@angular/common/http';
+// import { HttpHeaders } from '@angular/common/http';
+import { MailService } from './service/mail.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { LoginGoogleComponent } from './login-google/login-google.component';
+
 
 
 @NgModule({
@@ -16,7 +36,13 @@ import { AngularFireModule } from '@angular/fire';
     AppComponent,
     DatosComponent,
     LandingComponent,
-    PaypalComponent
+    PaypalComponent,
+    TrasaccionOkComponent,
+    TrasaccionErrorComponent,
+    LaflotaComponent,
+    HeaderComponent,
+    FooterComponent,
+    LoginGoogleComponent
 
   ],
   imports: [
@@ -24,9 +50,14 @@ import { AngularFireModule } from '@angular/fire';
     NgbModule,
     FormsModule,
     AppRoutingModule,
+     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+    cookieName: 'My-Xsrf-Cookie',
+    headerName: 'X-Access-Key',
+  }),
      AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [MailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

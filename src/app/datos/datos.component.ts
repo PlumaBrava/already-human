@@ -5,7 +5,7 @@ import { Producto } from '../productos/producto';
 import { Compra } from '../compras/compra';
 import {Router} from "@angular/router";
 import { ProductosService }  from '../productos.service';
-
+import { MailService }  from '../service/mail.service';
 @Component({
   selector: 'app-datos',
   templateUrl: './datos.component.html',
@@ -26,15 +26,17 @@ export class DatosComponent implements OnInit {
  mensajeMailNulo:string=null;
  mensajeConfirmarMail:string=null;
 
-
+  data:any;
   constructor(
   private route: ActivatedRoute,
   private productosService: ProductosService,
   private location: Location,
-private router: Router
+  private router: Router,
+  private mailService: MailService,
       ) {
         console.log("datos");
-        console.log(this.compra.producto);
+          console.log(this.compra.producto);
+
 
    }
 
@@ -73,6 +75,16 @@ private router: Router
 // this.location.back();
 // this.router.navigate(['/datos'],2);
 // this.router.navigateByUrl(['datos/2']);
+
+// this.mailService.sendMessage("FF").then(data=>console.log(data);)
+// .catch(error=>console.log(error););
+
+// console.log(this.mailService.sendMessage("FF"));
+// this.mailService.addHero("FF").subscribe((data) =>
+
+//     console.log(data)
+//         );
+
         if(this.compra.nombre==null){
             this.mensajeNombreNulo="El nombre es obligatorio";
         }
@@ -96,6 +108,95 @@ private router: Router
         }
 
     };
+
+EnviarMail(){
+  console.log("enviar Mail");
+  this.mailService.sendMessage("mensaje ss").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  }
+  )};
+
+ EnviarAlbum(){
+  console.log("EnviarAlbum");
+  this.mailService.sendMessage("EnviarAlbum").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  });
+ }
+
+ListarAlbum(){
+  console.log("ListarAlbum");
+  this.mailService.ListarAlbum("ListarAlbum").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
+ListarAlbumServer(){
+  console.log("ListarAlbumServer");
+  this.mailService.ListarAlbumServer("ListarAlbumServer").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
+SetArtista(){
+  console.log("SetArtista");
+  this.mailService.SetArtista("SetArtista").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
+GetArtista(){
+  console.log("SetArtista");
+  this.mailService.GetArtista("SetArtista").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
+ GetGenRes(){
+  console.log("GetGenRes");
+  this.mailService.GetGenres("GetGenRes").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
 
 validateEmail(email)
 {
@@ -121,4 +222,21 @@ validateEmail(email)
             };
 
     };
+
+Infotrack(){
+  console.log("Infotrack");
+  this.mailService.Infotrack("Infotrack").subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
 }
+
+
