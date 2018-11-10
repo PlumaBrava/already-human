@@ -1,0 +1,205 @@
+.table-dsps tbody>tr.dsp-row-published .status-wrapper, .table-dsps tbody>tr.dsp-row-submit .status-wrapper {
+    height: 43px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.dsp-item-logo {
+    width: 51px;
+    height: 51px;
+    background: url(src/assets/Imagenes/dsp-logos-v2.png?v2.1) no-repeat center center transparent;
+    /*background: url('src/assets/Imagenes/ing.gif') no-repeat center center transparent;*/
+    background-size: 357px 357px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.dsp-item-logo-alibaba {
+    background-position: -204px -306px;
+}
+ .dsp-item-logo-cell {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+
+
+.dsp-item-logo-facebookmusic {
+    background-position: -255px -306px;
+}
+
+
+
+.dsp-item-logo-kkbox {
+    background-position: -153px -204px;
+}
+
+
+.dsp-item-logo-linemusic {
+    background-position: -306px -153px;
+}
+
+
+.dsp-item-logo-real {
+    background-position: -255px -51px;
+}
+
+.dsp-item-logo-neuroticmedia {
+    background-position: -255px -255px;
+}
+
+
+.dsp-item-logo-rxmusic {
+    background-position: -306px -306px;
+}
+
+
+.dsp-item-logo-shazam {
+    background-position: 0 -255px;
+}
+
+
+.dsp-item-logo-soundcloud {
+    background-position: -51px -255px;
+}
+
+
+
+.dsp-item-logo-spotify {
+    background-position: -51px -102px;
+}
+
+.dsp-item-logo-touchtunes {
+    background-position: -102px -306px;
+}
+
+.dsp-item-logo-appliedsb {
+    background-position: -102px -255px;
+}
+
+.dsp-item-logo-youtube {
+    background-position: -255px -102px;
+}
+.dsp-item-logo-youtubepublishing {
+    background-position: -255px -102px;
+}
+
+.dsp-item-logo-akazoo {
+    background-position: 0 -306px;
+}
+
+.dsp-item-logo-awa {
+    background-position: -51px -306px;
+}
+
+.dsp-item-logo-facebookfingerprinting {
+    background-position: -255px -306px;
+}
+
+.dsp-item-logo-leeway {
+    background-image: url(src/assets/Imagenes/dsp-logo-leeway.png);
+    background-size: cover;
+}
+
+.dsp-item-logo-kanjian {
+    background-position: -102px -51px;
+}
+.dsp-item-logo-medianet {
+    background-position: -153px -51px;
+}
+
+
+.dsp-item-logo-netease {
+    background-position: -153px -306px;
+}
+
+.dsp-item-logo-pandora {
+    background-position: -204px -51px;
+}
+
+
+.dsp-item-logo-saavn {
+    background-position: -306px -51px;
+}
+
+.dsp-item-logo-slacker {
+    background-position: -306px 0;
+}
+
+
+.dsp-item-logo-soundexchange {
+    background-position: -306px -255px;
+}
+
+
+.dsp-item-logo-aspiro {
+    background-position: -102px -102px;
+}
+
+.dsp-item-logo-umamusic {
+    background-position: -306px -102px;
+}
+
+
+.dsp-item-logo-vidzone {
+    background-position: -153px -102px;
+}
+
+
+.dsp-item-logo-youtubemusic {
+    background-position: -255px -102px;
+}
+.dsp-item-logo-zvook {
+    background-position: 0 -153px;
+}
+
+
+
+
+
+
+.logo-kanjian{background-position:-102px -51px}
+.dsp-item-logo-juno{background-position:-102px -204px}
+.dsp-item-logo-itunes{background-position:-51px -204px}
+.dsp-item-logo-imusica{background-position:-51px -51px}
+.dsp-item-logo-thumbplay{background-position:0 -204px}
+.dsp-item-logo-omnifone{background-position:0 -51px}
+.dsp-item-logo-googlemusic{background-position:-255px -153px}
+.dsp-item-logo-eos{background-position:-255px 0}
+.dsp-item-logo-emusic{background-position:-204px -153px}
+.dsp-item-logo-deezer{background-position:-204px 0}
+.dsp-item-logo-beatport{background-position:-153px -153px}
+.dsp-item-logo-audiblemagic{background-position:-153px 0}
+.dsp-item-logo-amie{background-position:-102px -153px}
+.dsp-item-logo-amazondod{background-position:-102px 0}
+.dsp-item-logo-amazon{background-position:-102px 0}
+.dsp-item-logo-eighttrack{background-position:-51px 0}
+.dsp-item-logo-sevendigital{background-position:-51px -153px}
+.dsp-item-logo-twenty4seven{background-position:0 0}
+.link-icon{width:23px;height:23px;margin-left:13px;margin-bottom:-5px;display:inline-block;background-repeat:no-repeat}
+.dsp-item-logo-leeway{background-image:url(/img/dsp-logo-leeway.png);background-size:cover}
+.chart-actions .itunes-link{float:left!important}
+.chart-actions .itunes-link .btn{padding-left:0;padding-top:0;color:#04c0ec;font-size:24px;background-color:#fff;border:none}
+.chart-actions .chart-filter{float:right!important;margin:0;padding:8px 0 0}
+.chart-actions .chart-filter a,.chart-actions .chart-filter li{color:#6d6e71;font-size:14px}
+.chart-actions .chart-filter li{float:left!important;padding-left:16px;background:0 0}
+.chart-actions .chart-filter li:first-child{padding-left:0}
+.chart-actions .chart-filter li.active,.chart-actions .chart-filter li.active a{text-decoration:underline;color:#04c0ec}
+#chartContainer{margin-top:20px}#addAlbumModal
+.modal-title{text-align:left}.homepage{font-family:'PT Sans',sans-serif;background-color:#424242}
+.homepage .homepage-common-block{height:717px;max-width:1600px;margin:0 auto}
+.homepage .whiteout{position:absolute;width:100%;height:100%;background-color:rgba(255,255,255,.5);top:0;z-index:3}.homepage .distribution{background:url(/img/homepage-distribution-bg.png) no-repeat}@media only screen and (max-width:767px){.homepage .distribution{background:url(/img/homepage-distribution-bg-mobile.png) no-repeat}}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .distribution{background-size:cover;padding:30px 0;height:auto}}.homepage .distribution .content{text-align:center;margin:0 auto;font-size:24px;color:#fff;line-height:28px}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .distribution .content{margin-top:2.5%}}@media only screen and (min-width:1198px){.homepage .distribution .content{margin-top:12.5%}}.homepage .distribution .title{font-size:67px;color:#fff;text-transform:uppercase;font-weight:800;line-height:67px}.homepage .distribution .blue{color:#1ebce6;margin-bottom:58px}.homepage .distribution .content a{text-transform:uppercase;color:#fff;background-color:#151515;font-size:18px;padding:10px 40px;border-radius:30px;-webkit-transition:all .24s ease 0;-moz-transition:all .24s ease 0;-o-transition:all .24s ease 0;outline:0}.homepage .distribution .content a:active,.homepage .distribution .content a:focus,.homepage .distribution .content a:hover{text-decoration:none}.homepage .distribution .content a:hover{background-color:#d38484;color:#fff}.homepage .distribution .content .button-wrapper{width:100%;text-align:center;margin-top:62px}.homepage .monetization-info{background:#fefefe;background:-moz-linear-gradient(top,#fefefe 50%,#d4d4d4 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(50%,#fefefe),color-stop(100%,#d4d4d4));background:-webkit-linear-gradient(top,#fefefe 50%,#d4d4d4 100%);background:-o-linear-gradient(top,#fefefe 50%,#d4d4d4 100%);background:-ms-linear-gradient(top,#fefefe 50%,#d4d4d4 100%);background:linear-gradient(to bottom,#fefefe 50%,#d4d4d4 100%)}@media only screen and (max-width:767px){.homepage .monetization-info{position:relative}}.homepage .monetization-info .monetization-background{background:url(/img/homepage-monetization-bg.png) no-repeat center;height:718px}@media only screen and (max-width:767px){.homepage .monetization-info .monetization-background{position:absolute;width:100%;height:100%;height:500px;z-index:1}}@media only screen and (max-width:767px),only screen and (min-width:768px) and (max-width:1198px){.homepage .monetization-info .monetization-background{background-size:contain}}.homepage .monetization-info .title{font-size:50px;font-weight:600;color:#00bddd;width:100%;margin-bottom:25px;line-height:50px}.homepage .monetization-info .content{color:#1d1b1c;font-size:24px;line-height:40px}@media only screen and (max-width:767px){.homepage .monetization-info .content{text-align:center;margin:175px auto}}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .monetization-info .content{margin:130px auto}}@media only screen and (min-width:1198px){.homepage .monetization-info .content{margin:150px auto}}.homepage .advantage{background:url(/img/homepage-advantages-bg.png);color:#fff}@media only screen and (max-width:767px){.homepage .advantage{background:url(/img/homepage-advantages-bg-mobile.png)}}.homepage .advantage #advantage>div{font-size:24px;line-height:41px}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .advantage #advantage>div{margin-top:155px}}@media only screen and (min-width:1198px){.homepage .advantage #advantage>div{margin-top:215px}}.homepage .advantage .title{margin-bottom:55px;font-size:44px;font-weight:800}.homepage .youtube-mcn{position:relative;background:url(/img/homepage-youtube-mcn-bg.png) no-repeat;font-size:22px;color:#211b1f}@media only screen and (max-width:767px){.homepage .youtube-mcn{background:url(/img/homepage-youtube-mcn-bg-mobile.png) no-repeat}}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .youtube-mcn{background-position:-175px}}.homepage .youtube-mcn .container>div{float:right;line-height:38px;z-index:9}@media only screen and (max-width:767px){.homepage .youtube-mcn .container>div{text-align:center}}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .youtube-mcn .container>div{text-align:right;margin-top:80px}}@media only screen and (min-width:1198px){.homepage .youtube-mcn .container>div{margin-top:135px}}.homepage .youtube-mcn .title{font-size:44px;color:#1ebce6;font-weight:700;width:100%;margin-bottom:36px;float:left}.homepage .analytics{background:#2bd9f1;background:-moz-linear-gradient(top,#2bd9f1 48%,#19b1e2 80%);background:-webkit-gradient(linear,left top,left bottom,color-stop(48%,#2bd9f1),color-stop(80%,#19b1e2));background:-webkit-linear-gradient(top,#2bd9f1 48%,#19b1e2 80%);background:-o-linear-gradient(top,#2bd9f1 48%,#19b1e2 80%);background:-ms-linear-gradient(top,#2bd9f1 48%,#19b1e2 80%);background:linear-gradient(to bottom,#2bd9f1 48%,#19b1e2 80%)}.homepage .analytics,.homepage .analytics .container{position:relative}.homepage .analytics .container>div:first-child{z-index:9}.homepage .analytics .container>div:nth-child(2){z-index:1}.homepage .analytics .container>div{font-size:22px;color:#211b1f;line-height:35px}@media only screen and (min-width:768px) and (max-width:1198px){.homepage .analytics .container>div{margin-top:125px}}@media only screen and (min-width:1198px){.homepage .analytics .container>div{margin-top:165px}}.homepage .analytics .title{font-size:44px;color:#fff;margin-bottom:50px;font-weight:800}.homepage .analytics .graph{position:absolute;height:717px;margin:0!important;background:url(/img/homepage-analytics-bg.png) no-repeat right -10px}@media only screen and (max-width:767px){.homepage .analytics .graph{min-height:100%;height:auto}}@media only screen and (max-width:767px),only screen and (min-width:768px) and (max-width:1198px){.homepage .analytics .graph{background-size:contain;top:0}}.homepage .featured-clients{background-color:#fff}.homepage .featured-clients .title{text-align:center;text-transform:uppercase;font-size:50px;font-weight:600;color:#00bddd}@media only screen and (max-width:767px){.homepage .featured-clients .title{margin-bottom:40px}}@media only screen and (min-width:768px) and (max-width:1198px),only screen and (min-width:1198px){.homepage .featured-clients .title{margin:80px 0}}@media only screen and (max-width:767px){.homepage .advantage,.homepage .analytics,.homepage .distribution,.homepage .featured-clients,.homepage .monetization-info,.homepage .youtube-mcn{height:auto;padding:30px 0;background-size:cover}.homepage .advantage .content,.homepage .analytics .content,.homepage .distribution .content,.homepage .featured-clients .content,.homepage .monetization-info .content,.homepage .youtube-mcn .content{margin:0 auto}}@media only screen and (min-width:768px) and (max-width:1198px),only screen and (min-width:1198px){.item .additional-buttons{float:left}}@media only screen and (min-width:768px) and (max-width:1198px),only screen and (min-width:1198px){.item .search-label-form{float:right}}.item .member_detail_action{margin-top:38px}.item #member_detail_edit_form,.item #member_detail_edit_table{display:none}.dsp-page .select-all-wrapper{margin:0 0 30px}.dsp-page label{font-weight:400}.dsp-page .dsp-list td:nth-child(-n+3){padding-right:0}.dsp-page .dsp-list label{font-weight:400}.dsp-page .form-inline{margin-bottom:5px}.table-loader-container{position:relative}.table-loader-container .overlay{position:absolute;width:100%;height:100%;margin-top:-27px;margin-left:-27px;display:none;background-color:rgba(246,246,246,.4);z-index:9}.table-loader-container .overlay img{position:absolute;left:41%;top:100px}.intable-download-wrapper{padding:0 0 8px 0}.table-admin{width:100%}.table-admin .territories-list{max-width:200px;display:inline-block;width:100%;word-break:break-all}.table-admin .down-img,.table-admin .up-img{display:inline-block;height:10px;margin-left:5px;margin-top:4px;width:9px}.table-admin .up-img{background:url(/images/uparrow.png) no-repeat}.table-admin .down-img{background:url(/images/downarrow.png) no-repeat}@media only screen and (min-width:768px) and (max-width:991px),only screen and (min-width:992px) and (max-width:1199px){.labels-new-filter{float:left!important;width:100%}.labels-new-filter form{float:none!important;margin-top:15px}}@media only screen and (min-width:1198px){.modal .modal-deals-margin{margin-top:164px}}@media only screen and (min-width:768px) and (max-width:991px),only screen and (min-width:992px) and (max-width:1199px){.modal #search-albums-for-deal{margin-top:40px}}#additionalFiltersModal .form-group{margin-bottom:11px}#additionalFiltersModal .select2-container{display:block;width:100%!important}.member-select{width:87px!important}.member-form .form-horizontal .col-sm-6:last-child{padding-right:0}.member-form .form-horizontal .form-group{padding:8px;margin:0;border-top:1px solid #ddd}.member-form .form-horizontal label{padding-left:0;font-weight:400;text-align:left}.member-form .form-horizontal .form-control{padding-right:0}.artist-page .sidebar-wrapper{margin-top:10px}.artist-page .albums-wrapper{height:180px;overflow-y:auto}.artist-page .album-wrapper{width:187px;height:179px;padding:12px 12px 0}.artist-page .album{padding:7px;background-color:#fff}.artist-page .album-art-link{display:block;width:75px;height:75px}.artist-page .album-title{display:block;font-family:Montserrat;font-size:14px;color:#000;text-transform:uppercase;text-decoration:none}.artist-page .album-title:hover{text-decoration:underline}.artist-page .album-link{display:block;font-size:12px}.artist-page .album-details .album-attributes{margin-top:10px}.artist-page .album-details .album-attributes-item{padding:5px 0 3px}.artist-page .album-details .album-attributes-label{font-weight:700}.artist-page .album-details .album-attributes-value{margin-left:7px}.artist-page .tracks-list{margin-top:20px}.artist-page .artist-social-sites{margin-top:-10px}.artist-page .artist-social-sites li{margin-top:10px}.artist-page .add-this-block{padding-top:16px}@media only screen and (-moz-min-device-pixel-ratio:1.5),only screen and (-o-min-device-pixel-ratio:1.5),only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min-devicepixel-ratio:1.5),only screen and (min-resolution:1.5dppx){
+ .artist-page .icon{
+        /*background-image:url(icon@2x.png);*/
+        background-size:100px 100px}}
+
+.icon-album-unpublished, .image-album-status-submit, .media-album-cont .media-status-submit, .table-dsps tbody>tr.dsp-row-submit .status {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAZCAYAAAAv3j5gAAAACXBIW…3390oNp7OSLaJUtoBh3Eorm90yh5sY3lyYtC238qjr/gwAkvGciqtfKBkAAAAASUVORK5CYII=);
+}

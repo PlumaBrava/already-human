@@ -1,0 +1,97 @@
+
+<h3>New Artist</h3>
+<div class="loader" *ngIf="esperandoDatos"></div>
+<div   *ngIf="artista" [hidden]="submitted" style="width: 300px;">
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="artista.name" name="name">
+    </div>
+
+<!--     <div class="form-group">
+      <label for="label_id">label_id</label>
+      <input type="text" class="form-control" id="label_id" required [(ngModel)]="artista.label_id" name="label_id">
+    </div>
+ -->
+
+<!-- Label -->
+
+    <!-- <div class="form-group col-md-12"> -->
+        <!-- <label for="label_id">label_id</label> -->
+    <div class="form-group">
+      <label for="label_id">Label_id</label>
+        <div class="row">
+          <input class=" form-control col-md-4 mr-sm-2" type="text" [(ngModel)]="artista.label_id" [hidden]="true" name="label_id" >
+            <!-- <a class="btn btn-success col-md-2 form-control mr-sm-2" routerLink="/labelList">Label</a> -->
+            <a class="btn btn-success col-md-4 form-control mr-sm-2" (click)="buscarLabel()">Label</a>
+                  <input class=" form-control col-md-7 " type="text" value="{{artista.labelName}}" disabled="disabled">
+        </div>
+          <!-- <div [hidden]="crearAlbumForm.controls.label_id.valid || crearAlbumForm.controls.label_id.pristine"  class="alert alert-danger"> -->
+              <!-- Label is required -->
+        <!-- </div> -->
+   </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <!-- <input type="text" class="form-control" id="genero" required [(ngModel)]="artista.genre" name="genero"> -->
+       <select   class="form-control selectpicker"  id="genre"  name="album_territories[]" required [(ngModel)]="artista.genre" name="genre">
+
+
+                               <option  *ngFor="let gen of genre" [value]="gen.id" >{{gen.val}}</option>
+                            </select >
+    </div>
+
+
+       <!--  <div class="form-group "  *ngIf="genre">
+                            <label for="album_alt_genres">album_territories <span class="help-small " ><small> (hold ctrl to select more than one)</small></span></label>
+                            <select   class="form-control selectpicker"  id="album_territories"  name="album_territories[]">
+
+                              <option value="AF">Afghanistan</option>
+                                <option value="AX">Åland Islands</option>
+                               <option  *ngFor="let gen of genre" [value]="gen.id" >{{gen.val}}</option>
+                            </select >
+                        </div> -->
+
+
+
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      <input type="text" class="form-control" id="bio" required [(ngModel)]="artista.bio" name="bio">
+    </div>
+
+
+<button type="submit" class="btn btn-primary">Save</button>
+
+
+
+  </form>
+
+
+
+
+</div>
+
+
+<div *ngIf="submitted">
+  <h4>You submitted successfully! </h4>
+  <h4>Id: {{IdCreado}} </h4>
+  <button class="btn btn-success" (click)="newArtista()">New Artista</button>
+</div>
+
+
+
+  <p>
+  <ngb-alert [dismissible]="false"  *ngIf="error">
+    <strong>Warning!</strong>{{error}}
+  </ngb-alert>
+</p>

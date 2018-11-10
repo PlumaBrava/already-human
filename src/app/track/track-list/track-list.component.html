@@ -1,0 +1,51 @@
+<div class="marco">
+
+    <h1 class="tituloLista">Tracks <a class="btn btn-primary float-center" routerLink="/trackCrear"   role="button" >Agregar Track </a></h1>
+
+
+
+<!--
+<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [boundaryLinks]="true" [pageSize]="pageSize" (pageChange)="getAlbum('',page)"></ngb-pagination> -->
+
+<div class="loader" *ngIf="esperandoDatos"></div>
+
+
+
+<table class="table table-striped table-responsive"  *ngIf="data" >
+    <thead>
+    <tr>
+        <th style="width: 10%"> Disc Number </th>
+        <th style="width: 10%"> position  </th>
+        <th style="width: 20%"> title  </th>
+        <th style="width: 20%"> isrc  </th>
+        <th style="width: 10%">   </th>
+        <th style="width: 10%">   </th>
+        <th style="width: 10%">   </th>
+        <th style="width: 10%">  </th>
+        <th style="width: 10%">  </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data.body.items" >
+            <td>{{item.disc_number}}</td>
+            <td>{{item.position}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.isrc}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>    <button class="btn btn-info  mr-sm-2" (click)="modificarTrack(item)">Edit</button>   </td>
+            <td>    <button class="btn btn-success  mr-sm-2" (click)="publishAlbum(item)">Publish</button>  </td>
+        </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4">
+            <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator> -->
+        </td>
+    </tr>
+    </tfoot>
+</table>
+
+
+</div>

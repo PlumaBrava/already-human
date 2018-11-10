@@ -14,10 +14,17 @@
   <div class="col">
     <div ngbDropdown class="d-inline-block">
         <button  class="btn btn-success" (click)="EnviarMail()" >Mail</button>
+        <button  class="btn btn-success" (click)="buscaVehiculos()" >buscaVehiculos</button>
+        <button  class="btn btn-success" (click)="buscaVehiculosHistorico()" >buscaVehiculosHistoricos</button>
         <button  class="btn btn-success" (click)="EnviarAlbum()" >EnviarAlbum</button>
         <button  class="btn btn-success" (click)="ListarAlbum()" >ListarAlbum</button>
 
-        <button  class="btn btn-success" (click)="Infotrack()" >Infotrack</button>
+        <!-- <button  class="btn btn-success" (click)="ListarAlbumServer('jj',1)" >ListarAlbumServer</button> -->
+                <button  class="btn btn-success" (click)="SetArtista()" >SetArtista</button>
+                <!-- <button  class="btn btn-success" (click)="GetArtista()" >GetArtista</button> -->
+                <button  class="btn btn-success" (click)="GetGenRes()" >GetGenRES</button>
+
+
 <div *ngIf="data">
 
 {{data}}

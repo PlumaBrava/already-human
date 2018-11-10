@@ -111,7 +111,7 @@ export class DatosComponent implements OnInit {
 
 EnviarMail(){
   console.log("enviar Mail");
-  this.mailService.sendMessage("mensaje ss").subscribe(
+  this.mailService.sendMessage("mensaje test").subscribe(
   data => {
     this.data = data;
     console.log(data);
@@ -169,9 +169,10 @@ SetArtista(){
   );
  }
 
-GetArtista(){
+GetArtista(search:any,page:number){
   console.log("SetArtista");
-  this.mailService.GetArtista("SetArtista").subscribe(
+  this.mailService.GetArtista(search,page).subscribe(
+
   data => {
     this.data = data;
     console.log(data);
@@ -185,7 +186,7 @@ GetArtista(){
 
  GetGenRes(){
   console.log("GetGenRes");
-  this.mailService.GetGenres("GetGenRes").subscribe(
+  this.mailService.GetGenres().subscribe(
   data => {
     this.data = data;
     console.log(data);
@@ -223,9 +224,24 @@ validateEmail(email)
 
     };
 
-Infotrack(){
-  console.log("Infotrack");
-  this.mailService.Infotrack("Infotrack").subscribe(
+// Infotrack(){
+//   console.log("Infotrack");
+//   this.mailService.Infotrack("Infotrack").subscribe(
+//   data => {
+//     this.data = data;
+//     console.log(data);
+//   },
+//  error =>{
+//    console.log(error);
+//  }
+
+//   );
+//  }
+
+
+buscaVehiculos(){
+  console.log("buscaVehiculos");
+  this.mailService.buscaVehiculos().subscribe(
   data => {
     this.data = data;
     console.log(data);
@@ -236,6 +252,21 @@ Infotrack(){
 
   );
  }
+
+ buscaVehiculosHistorico(){
+  console.log("buscaVehiculosHistorico");
+  this.mailService.buscaVehiculosHistorico().subscribe(
+  data => {
+    this.data = data;
+    console.log(data);
+  },
+ error =>{
+   console.log(error);
+ }
+
+  );
+ }
+
 
 }
 

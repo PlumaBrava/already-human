@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpParams   } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 // import {RequestOptions, URLSearchParams  } from '@angular/common/http';
 
-
+import { Album } from '../album/album';
 import { Observable, throwError } from 'rxjs';
 // import { catchError, retry } from 'rxjs/operators'
 
@@ -14,6 +15,9 @@ import { Observable, throwError } from 'rxjs';
 export class MailService {
     params:HttpParams;
     header:HttpHeaders;
+    // URL_SERVER:string='https://us-central1-ignatest-c4444.cloudfunctions.net/';  //Desarrollo
+   // URL_SERVER:string='https://us-central1-laflota-19ada.cloudfunctions.net/'; // Produccion
+   URL_SERVER:string=environment.dashgo.URL_SERVER; // Produccion
 
   constructor(private _http: HttpClient) { }
 
@@ -36,8 +40,8 @@ params.set('var2', "val2");
     this.params.set("assunto","subjetParams");
     // this.header.append('Authorization', "clave");
     this.header.append('Content-Type', "application/json");
-    // this.header.append('Access-Control-Allow-Origin', "*");
-    this.header.append('Access-Control-Allow-Origin', "http://localhost:4200");
+    this.header.append('Access-Control-Allow-Origin', "*");
+    // this.header.append('Access-Control-Allow-Origin', "http://localhost:4200");
 
    var config={
         params:this.params,
@@ -45,10 +49,6 @@ params.set('var2', "val2");
 
     }
 
-  var  bodyInfotrack= {
-                    mode: "raw",
-                    raw: {Usuario:"nutralmix",Password:"159"}
-                };
 
 
 var body1={
@@ -56,10 +56,9 @@ var body1={
         body: body,
         userId: 1
       };
- // return this._http.post('https://us-central1-ignatest-c4444.cloudfunctions.net/enviarEmail',requestOptions);
- // return this._http.post('https://us-central1-ignatest-c4444.cloudfunctions.net/enviarEmail?assunto=Compra A');
- // return this._http.post('https://us-central1-ignatest-c4444.cloudfunctions.net/enviarEmail',body1);
- return this._http.post('https://ver.infotrak.com.ar:8144/api/vehiculos', bodyInfotrack,  {headers: this.header});
+
+ return this._http.post(this.URL_SERVER+'enviarEmail',body1);
+
 
 
 // return this._http.get('https://api.github.com/users/seeschweiler');
@@ -119,10 +118,7 @@ const httpOptions = {
 //   httpOptions.headers.set('Authorization', 'X-Access-Key demo-9yKGSuHvuYvY6KFqFAMR');
 
  return this._http.get('http://apidev.dashgo.com/api/v1/albums/',  httpOptions);
- // return this._http.get('http://apidev.dashgo.com/api/v1/albums/',   {headers: headerq});
- // return this._http.post('https://us-central1-ignatest-c4444.cloudfunctions.net/listarAlbum',"");
 
-// return this._http.get('https://api.github.com/users/seeschweiler');
 
  };
 
@@ -130,9 +126,10 @@ const httpOptions = {
 ListarAlbumServer(body): Observable<any>{
     console.log("ListarAlbumServer",body);
 
-let params: URLSearchParams = new URLSearchParams();
-params.set('var1', "val1");
-params.set('var2', "val2");
+// let params: URLSearchParams = new URLSearchParams();
+let params = new HttpParams();
+params.set('var1', "val11");
+params.set('var2', "val22");
 
 // let requestOptions = new RequestOptions();
 // requestOptions.search = params;
@@ -145,6 +142,8 @@ params.set('var2', "val2");
     // // this.header.append('Access-Control-Allow-Origin', "*");
     // this.header.append('Access-Control-Allow-Origin', "http://localhost:4200");
 
+    let p=HttpParams
+
    var config={
         params:this.params,
         header:this.header,
@@ -154,114 +153,283 @@ params.set('var2', "val2");
 
 
 var body1={
-        title: 'foo',
-        body: body,
-        userId: 1
+        search: 'foo',
+        upc: body,
+        page: 1
       };
 
- return this._http.get('https://us-central1-ignatest-c4444.cloudfunctions.net/listarAlbumServer');
+ return this._http.get(this.URL_SERVER+'listarAlbumServer?params=Compra b');
 
 
 // return this._http.get('https://api.github.com/users/seeschweiler');
 
  };
 
-SetArtista(body): Observable<any>{
-    console.log("SetArtista",body);
+SetArtista(artista): Observable<any>{
+    console.log("SetArtista",artista);
 
 
 
 
 
- return this._http.get('https://us-central1-ignatest-c4444.cloudfunctions.net/setArtista');
-
-
-
-
- };
-
-GetArtista(body): Observable<any>{
-    console.log("GetArtista",body);
-
- return this._http.get('https://us-central1-ignatest-c4444.cloudfunctions.net/getArtista');
+ return this._http.post(this.URL_SERVER+'setArtista',{'artista':artista});
 
 
 
 
  };
 
-GetGenres(body): Observable<any>{
-    console.log("GetGenres",body);
+GetArtista(search:any,page:number): Observable<any>{
+    console.log("GetArtista");
+    console.log("GetArtista search",search);
+    console.log("GetArtista page",page);
 
- return this._http.get('https://us-central1-ignatest-c4444.cloudfunctions.net/getGenres');
+    const url:string=this.URL_SERVER+'getArtista?search='+search+'&page='+page;
 
-
+ return this._http.get(url);
 
 
  };
 
 
-Infotrack(body): Observable<any>{
-    console.log("Infotrack",body);
+ GetArtistaById(id:number): Observable<any>{
+    console.log("GetArtistaByID");
+    console.log("GetArtistaByID id",id);
 
-let params: URLSearchParams = new URLSearchParams();
-params.set('var1', "val1");
-params.set('var2', "val2");
+    const url:string=this.URL_SERVER+'getArtistaById?id='+id;
 
-// let requestOptions = new RequestOptions();
-// requestOptions.search = params;
+ return this._http.get(url);
 
-    // this.params = new HttpParams();
-    this.header = new HttpHeaders();
-    // this.params.set("assunto","subjetParams");
-    // // this.header.append('Authorization', "clave");
-    // this.header.append('Content-Type', "application/json");
-    // // this.header.append('Access-Control-Allow-Origin', "*");
-    // this.header.append('Access-Control-Allow-Origin', "http://localhost:4200");
 
+ };
+
+
+ getTracks(album_id:string,isrc:string,page:number): Observable<any>{
+    console.log("getTracks");
+    console.log("GetArtista album_id",album_id);
+    console.log("GetArtista isrc",isrc);
+    console.log("GetArtista page",page);
+
+
+    const url:string=this.URL_SERVER+'getTracks?album_id='+album_id;
+
+ return this._http.get(url);
+
+
+ };
+
+ getDistributeAlbums(dsp_site:number,album_id:number): Observable<any>{
+    console.log("getDistributeAlbums");
+    console.log("getDistributeAlbums dsp_site",dsp_site);
+    console.log("getDistributeAlbums album_id",album_id);
+    let url:string=null;
+
+    if(album_id && !dsp_site){
+    url=this.URL_SERVER+'getDistributeAlbum?album_id='+album_id;
+    } else if(!album_id && dsp_site){
+    url=this.URL_SERVER+'getDistributeAlbum?dsp_site='+dsp_site;
+    } else if(album_id && dsp_site){
+    url=this.URL_SERVER+'getDistributeAlbum?dsp_site='+dsp_site+'&album_id='+album_id;
+    } else {
+    url=this.URL_SERVER+'getDistributeAlbum';
+    }
+
+ return this._http.get(url);
+
+
+ };
+
+
+setDistributeAlbums(form:FormData): Observable<any>{
+    console.log("setDistributeAlbums");
+
+
+ return this._http.post(this.URL_SERVER+'setDistributeAlbums',form);
+
+ };
+
+
+
+setTrack(form:FormData): Observable<any>{
+    console.log("SetTrack");
+    return this._http.post(this.URL_SERVER+'setTrack',form);
+
+ };
+
+ updateTrack(form:FormData): Observable<any>{
+   console.log("updateTrack");
+ return this._http.put(this.URL_SERVER+'updateTrack',form);
+
+ };
+
+ getUsers(): Observable<any>{
+    console.log("getUsers");
+    const url:string=this.URL_SERVER+'getUsers';
+    return this._http.get(url);
+ };
+
+GetDsps(): Observable<any>{
+    console.log("GetDsps");
+
+
+    const url:string=this.URL_SERVER+'getDsps';
+
+ return this._http.get(url);
+
+
+ };
+
+
+
+
+getPublishers(): Observable<any>{
+    console.log("GetGenres");
+
+
+    const url:string=this.URL_SERVER+'getPublishers';
+
+ return this._http.get(url);
+
+
+ };
+
+
+GetGenres(): Observable<any>{
+    console.log("GetGenres");
+
+
+    const url:string=this.URL_SERVER+'getGenres';
+
+ return this._http.get(url);
+
+
+ };
+
+
+
+GetAlbum(search:any,page:number): Observable<any>{
+    console.log("GetAlbum");
+
+
+
+    const url:string=this.URL_SERVER+'getAlbum?search='+search+'&page='+page;
+
+ return this._http.get(url);
+
+
+ };
+
+GetAlbumById(album_id:number): Observable<any>{
+    console.log("GetAlbumById");
+
+
+
+    const url:string=this.URL_SERVER+'getAlbumById?album_id='+album_id;
+
+ return this._http.get(url);
+
+
+ };
+
+
+SetAlbum(form:FormData): Observable<any>{
+    console.log("SetAlbum");
+    console.log(form.get('cover'));
+
+ return this._http.post(this.URL_SERVER+'setAlbumForm',form);
+
+ };
+
+deleteAlbum(album:Album): Observable<any>{
+    console.log("deleteAlbum");
+    let data={'id':album.id};
+    // data: {"Id": Id, "bolDeleteReq" : bolDeleteReq}
+     console.log("deleteAlbum Id: ",data);
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token',
-    'Access-Control-Allow-Origin': "*",
-  })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: data
 };
+ return this._http.delete(this.URL_SERVER+'deleteAlbum?id='+album.id);
+
+ };
+
+
+GetLabel(search:any,page:number): Observable<any>{
+    console.log("GetLabel");
+
+
+    const url:string=this.URL_SERVER+'getLabel?search='+search+'&page='+page;
+
+ return this._http.get(url);
+
+
+ };
+
+GetLabelById(id:number): Observable<any>{
+    console.log("GetLabelByID");
+    console.log("GetLabelByID id",id);
+
+    const url:string=this.URL_SERVER+'getLabelById?id='+id;
+
+ return this._http.get(url);
+
+
+ };
 
 
 
-   var config={
-        params:this.params,
-        header:this.header,
 
-    };
+buscaVehiculos(): Observable<any>{
+    console.log("buscaVehiculos");
 
 
-var  body1= {
-          mode: "raw",
-          raw: "{\r\n\"Usuario\":\"nutralmix\",\r\n\"Password\":\"159\"\r\n}",
-        };
+    const url:string=this.URL_SERVER+'buscaVehiculos';
 
-// "request": {
-//         "method": "POST",
-//         "header": [
-//           {
-//             "key": "Content-Type",
-//             "value": "application/json"
-//           }
-//         ],
-//         "body": {
-//           "mode": "raw",
-//           "raw": "{\r\n\"Usuario\":\"nutralmix\",\r\n\"Password\":\"159\"\r\n}"
-//         },
-
-
- return this._http.post('https://ver.infotrak.com.ar:8144/api/vehiculos',"body1",httpOptions);
+ return this._http.get(url);
 
 
 
 
  };
 
+
+buscaVehiculosHistorico(): Observable<any>{
+    console.log("buscaVehiculosHistorico");
+
+
+    const url:string=this.URL_SERVER+'buscaVehiculosHistorico';
+
+ return this._http.get(url);
+
+
+
+
+ };
+
+
+
+crearAlbumLocal(form:FormData): Observable<any>{
+
+
+
+
+const urlAlbum='http://apidev.dashgo.com/api/v1/albums/';
+const headers = new HttpHeaders()
+             .set('cache-control', 'no-cache')
+             .set('content-type', 'application/json')
+             .set('X-Access-Key:','demo-9yKGSuHvuYvY6KFqFAMR')
+
+
+         // const body = {
+         //     email: 'myemail@xyz.com',
+         //     user_password: 'mypasss',
+         //     token: 'my token'
+         // }
+
+          return this._http
+                    .post(urlAlbum,form , { headers: headers });
+
+
+}
 
 
 }

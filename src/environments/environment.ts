@@ -11,7 +11,10 @@ export const environment = {
     projectId: "ignatest-c4444",
     storageBucket: "ignatest-c4444.appspot.com",
     messagingSenderId: "93224403202"
-  }
+  },
+   dashgo:{
+     URL_SERVER:'https://us-central1-ignatest-c4444.cloudfunctions.net/'  //Desarrollo
+   }
 };
 /*
  * In development mode, to ignore zone related error stack frames such as

@@ -1,0 +1,1387 @@
+
+<div class="container">
+    <div class="row">
+        <div class="item-block col-md-12">
+            <div class="item statistics-summary">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Assign Distributors</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <span class="select-all btn btn-default" (click)="selectAllDsps()">Select All</span>
+                                <span class="select-none btn btn-default" (click)="selectNoneDsps()">Select None</span>
+                            </div>
+
+                            <span class="btn btn-primary btn-publish" (click)="publish()">Publish</span>
+                            <span class="btn btn-warning btn-takedown" (click)="takeDown()">Takedown</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Album {{album.title}}</h4>
+                    </div>
+
+                </div>
+
+                <!-- <hr /> -->
+
+               <!--  <div class="row">
+                    <div class="col-md-2">
+                        <ul>
+                            <li><span class="icon icon-album-published"></span>Published</li>
+                            <li><span class="icon icon-album-unpublished"></span>Unpublished</li>
+                            <li><span class="icon icon-album-takedown"></span>Takedown</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="item-prompt-cont">
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Red;">&nbsp;</span>
+                                    Downloads
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Green;">&nbsp;</span>
+                                    Streaming
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Purple;">&nbsp;</span>
+                                    Subscription
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Yellow;">&nbsp;</span>
+                                    Downloads &amp; Streaming &amp; Subscription
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Grey;">&nbsp;</span>
+                                    Ringtones
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Black;">&nbsp;</span>
+                                    CDAlbums
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: Blue;">&nbsp;</span>
+                                    InternetRadio
+                                </span>
+                                <span class="badge-cont">
+                                    <span class="badge badge-custom" style="background: HotPink;">&nbsp;</span>
+                                    Other
+                                </span>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <hr /> -->
+
+
+
+
+
+
+
+<form [formGroup]="crearDistributionForm" >
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+      <table class="table table-dsps" >
+
+<!-- twenty4seven -->
+            <tr class="dsp-row-submit">
+                <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-twenty4seven"></div></td>
+                <td>
+
+                    <a href="#" ><span class="fas fa-globe"></span></a>&nbsp;
+                    24-7
+                </td>
+
+                <td class="text-right">
+                    <input id="dsps_" name="dsps[]" type="checkbox" value="twenty4seven" />
+                    <!-- <img id="add_album_loader_45077_twenty4seven" style="display:none" src="/images/ajax-loader-tr.gif" width="12px"> -->
+                </td>
+
+<div class="checkbox checkbox-small">
+                                <label><input id="album_explicit" formControlName="twenty4seven" type="checkbox" value="twenty4seven" /> EM</label>
+                            </div>
+
+
+
+            </tr>
+
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-eighttrack"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=eighttrack"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        8 Tracks
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_eighttrack" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="eighttrack"  />
+                            <img id="add_album_loader_45077_eighttrack" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_eighttrack" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+
+
+
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-alibaba"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=alibaba"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Alibaba
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    <!-- Published: Never -->
+
+    </td>
+    <td id="album_link_cell_alibaba" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+
+<tr id="details_alibaba" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-amie"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=amie"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        AMI Entertainment
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_amie" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="amie" formControlName="amie"  />
+                            <img id="add_album_loader_45077_amie" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_amie" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-beatport"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=beatport"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Beatport
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_beatport" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" formControlName="beatport"/>
+                            <img id="add_album_loader_45077_beatport" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_beatport" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-eos"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=eos"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        EOS
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_eos" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="eos" />
+                            <img id="add_album_loader_45077_eos" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_eos" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-facebookmusic"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=facebookmusic"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Facebook Music
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_facebookmusic" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_facebookmusic" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-iheartradio"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=iheartradio"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        iHeartRadio
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_iheartradio" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_iheartradio" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-imusica"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=imusica"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        iMusica
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_imusica" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="imusica" />
+                            <img id="add_album_loader_45077_imusica" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_imusica" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-juno"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=juno"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Juno
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_juno" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_juno" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-kkbox"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=kkbox"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        KKBOX
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_kkbox" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="kkbox" />
+                            <img id="add_album_loader_45077_kkbox" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_kkbox" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-linemusic"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=linemusic"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        LINE Music
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_linemusic" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="linemusic" />
+                            <img id="add_album_loader_45077_linemusic" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_linemusic" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-real"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=real"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Napster
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_real" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="real" />
+                            <img id="add_album_loader_45077_real" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_real" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-neuroticmedia"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=neuroticmedia"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Neurotic Media
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_neuroticmedia" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="neuroticmedia" />
+                            <img id="add_album_loader_45077_neuroticmedia" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_neuroticmedia" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-rxmusic"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=rxmusic"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        RX Music
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_rxmusic" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_rxmusic" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-shazam"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=shazam"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Shazam
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_shazam" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="shazam" />
+                            <img id="add_album_loader_45077_shazam" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_shazam" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-soundcloud"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=soundcloud"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Soundcloud
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_soundcloud" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_soundcloud" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-spotify"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=spotify"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Spotify
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_spotify" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="spotify" />
+                            <img id="add_album_loader_45077_spotify" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_spotify" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-touchtunes"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=touchtunes"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        TouchTunes
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_touchtunes" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="touchtunes" />
+                            <img id="add_album_loader_45077_touchtunes" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_touchtunes" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-appliedsb"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=appliedsb"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        VerveLife
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_appliedsb" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="appliedsb" />
+                            <img id="add_album_loader_45077_appliedsb" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_appliedsb" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-youtube"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=youtube"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        YouTube
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_youtube" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="youtube" />
+                            <img id="add_album_loader_45077_youtube" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_youtube" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-youtubepublishing"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=youtubepublishing"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Youtube Publishing
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_youtubepublishing" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="youtubepublishing" />
+                            <img id="add_album_loader_45077_youtubepublishing" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_youtubepublishing" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+      </table>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-13 col-lg-6">
+      <table class="table table-dsps">
+
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-sevendigital"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=sevendigital"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        7 Digital
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_sevendigital" class="small">
+            <a href="#" class="modal-trigger" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_prices?album_id=45077&amp;album_price=9.99&amp;dsp=sevendigital&amp;track_price=0.99" id="get_album_price">$9.99</a>
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="sevendigital" />
+                            <img id="add_album_loader_45077_sevendigital" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_sevendigital" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-akazoo"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=akazoo"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Akazoo
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_akazoo" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="akazoo" />
+                            <img id="add_album_loader_45077_akazoo" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_akazoo" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-amazon"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=amazon"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Amazon MP3
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_amazon" class="small">
+            <a href="#" class="modal-trigger" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_prices?album_id=45077&amp;album_price=9.99&amp;dsp=amazon&amp;track_price=1.29" id="get_album_price">$9.99</a>
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="amazon" />
+                            <img id="add_album_loader_45077_amazon" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_amazon" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-awa"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=awa"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Awa Distribution
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_awa" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="awa" />
+                            <img id="add_album_loader_45077_awa" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_awa" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-deezer"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=deezer"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Deezer
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_deezer" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="deezer" />
+                            <img id="add_album_loader_45077_deezer" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_deezer" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-facebookfingerprinting"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=facebookfingerprinting"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Facebook Fingerprinting
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_facebookfingerprinting" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_facebookfingerprinting" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-googlemusic"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=googlemusic"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Google Music
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_googlemusic" class="small">
+            <a href="#" class="modal-trigger" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_prices?album_id=45077&amp;album_price=9.99&amp;dsp=googlemusic&amp;track_price=1.29" id="get_album_price">$9.99</a>
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="googlemusic" />
+                            <img id="add_album_loader_45077_googlemusic" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_googlemusic" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-thumbplay"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=thumbplay"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        iHeartRadio
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_thumbplay" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="thumbplay" />
+                            <img id="add_album_loader_45077_thumbplay" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_thumbplay" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-itunes"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=itunes"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        iTunes
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_itunes" class="small">
+            <a href="#" class="modal-trigger" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_prices?album_id=45077&amp;album_price=9.99&amp;dsp=itunes&amp;track_price=1.29" id="get_album_price">$9.99</a>
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="itunes" />
+                            <img id="add_album_loader_45077_itunes" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_itunes" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-kanjian"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=kanjian"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Kanjian
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_kanjian" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="kanjian" />
+                            <img id="add_album_loader_45077_kanjian" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_kanjian" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-leeway"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=leeway"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        LEEWAY
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_leeway" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_leeway" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-medianet"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=medianet"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        MediaNet
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_medianet" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="medianet" />
+                            <img id="add_album_loader_45077_medianet" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_medianet" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-netease"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=netease"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        NetEase
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_netease" class="small">
+
+
+    </td>
+    <td class="text-right">
+    </td>
+</tr>
+<tr id="details_netease" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-pandora"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=pandora"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Pandora
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_pandora" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="pandora" />
+                            <img id="add_album_loader_45077_pandora" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_pandora" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-saavn"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=saavn"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Saavn
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_saavn" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="saavn" />
+                            <img id="add_album_loader_45077_saavn" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_saavn" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-slacker"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=slacker"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Slacker
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_slacker" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="slacker" />
+                            <img id="add_album_loader_45077_slacker" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_slacker" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-soundexchange"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=soundexchange"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        SoundExchange
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_soundexchange" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="soundexchange" />
+                            <img id="add_album_loader_45077_soundexchange" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_soundexchange" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-aspiro"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=aspiro"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Tidal
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_aspiro" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="aspiro" />
+                            <img id="add_album_loader_45077_aspiro" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_aspiro" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-umamusic"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=umamusic"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Uma Music
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_umamusic" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="umamusic" />
+                            <img id="add_album_loader_45077_umamusic" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_umamusic" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-vidzone"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=vidzone"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        VidZone
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_vidzone" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="vidzone" />
+                            <img id="add_album_loader_45077_vidzone" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_vidzone" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-youtubemusic"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=youtubemusic"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Youtube Music
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_youtubemusic" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="youtubemusic" />
+                            <img id="add_album_loader_45077_youtubemusic" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_youtubemusic" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+<tr class="dsp-row-submit">
+    <td class="status">
+        <div class="status-wrapper">&nbsp;</div>
+    </td>
+    <td class="dsp-item-logo-cell"><div class="dsp-item-logo dsp-item-logo-zvook"></div></td>
+    <td>
+
+        <a href="#" class="modal-trigger sel-terr-link" data-parse="true" data-size="md" data-source="https://beta.dashgo.com/juan/distribution/select_territories?album_id=45077&amp;dsp=zvook"><span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+        Zvook
+    </td>
+    <td class="dsp-item-labels-cell">
+    </td>
+    <td class="small">
+                    Published: Never
+
+    </td>
+    <td id="album_link_cell_zvook" class="small">
+
+
+    </td>
+    <td class="text-right">
+                            <input id="dsps_" name="dsps[]" type="checkbox" value="zvook" />
+                            <img id="add_album_loader_45077_zvook" style="display:none" src="/images/ajax-loader-tr.gif" width="12px">
+    </td>
+</tr>
+<tr id="details_zvook" style="display:none" class="dsp-row-submit">
+    <td colspan="7">
+    </td>
+</tr>
+      </table>
+    </div>
+</div>
+</form>
+   <br>
+
+
+
+ <div class="row">
+ <div class="col-md-6 "> </div>
+ <div class="col-md-6 pull-right">
+                        <!-- <div class="pull-right"> -->
+                            <div class="btn-group" role="group" aria-label="...">
+                                <span class="select-all btn btn-default" (click)="selectAllDsps()">Select All</span>
+                                <span class="select-none btn btn-default" (click)="selectNoneDsps()">Select None</span>
+                            </div>
+
+                            <span class="btn btn-primary btn-publish" (click)="publish()">Publish</span>
+                            <span class="btn btn-warning btn-takedown" (click)="takeDown()">Takedown</span>
+                        <!-- </div> -->
+                    </div>
+                    </div>
+
+
+
+
+
+
+                   <!--  <div class="col-md-12 text-center"> La Flota</div> -->
+          <!--   </div> -->
+        <!-- </div> -->
+    <!-- </div> -->

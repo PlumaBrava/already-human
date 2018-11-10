@@ -1,0 +1,250 @@
+<div class="container">
+
+<h3 *ngIf="track.id==null">New Track</h3>
+<h3 *ngIf="track.id!=null">Edit Track</h3>
+<h3>Album: {{album.title}}</h3>
+
+
+
+<div class="loader" *ngIf="esperandoDatos"></div>
+    <div   *ngIf="track" [hidden]="esperandoDatos" >
+
+
+
+  <form  [formGroup]="crearTrackForm" >
+        <div class="item-block col-lg-12 col-md-12">
+
+    <p> Form crearTrackForm Status: {{ crearTrackForm.status }} </p>
+<div class="row">
+<!-- Title -->
+    <div class="form-group col-md-12" >
+      <label for="title">Title</label>
+
+        <input class="form-control" type="text" formControlName="title" >
+        <div [hidden]="crearTrackForm.controls.title.valid || crearTrackForm.controls.title.pristine"  class="alert alert-danger">
+              title is required
+        </div>
+        </div>
+
+
+
+<!-- Explicit -->
+
+
+            <div class="col-md-12">
+                            <div class="checkbox checkbox-small">
+                                <label><input id="album_explicit" formControlName="explicit" type="checkbox" value="1" /> Explicit Material</label>
+                            </div>
+           </div>
+
+<!-- disc_number -->
+
+        <div class="form-group col-md-6" >
+            <label for="disc_number">disc_number</label>
+
+                <input class="form-control" type="text" formControlName="disc_number" >
+                    <div [hidden]="crearTrackForm.controls.disc_number.valid || crearTrackForm.controls.disc_number.pristine"  class="alert alert-danger">
+                         disc_number is required
+                     </div>
+        </div>
+
+<!-- position -->
+
+        <div class="form-group col-md-6" >
+            <label for="position">position</label>
+
+            <input class="form-control" type="text" formControlName="position" >
+                <div [hidden]="crearTrackForm.controls.position.valid || crearTrackForm.controls.position.pristine"  class="alert alert-danger">
+                 position is required
+                </div>
+        </div>
+
+
+
+<!-- isrc -->
+
+        <div class="form-group col-md-6" >
+            <label for="isrc">isrc</label>
+
+            <input class="form-control" type="text" formControlName="isrc"  data-format="^[A-Za-z]{2}-[0-9A-Za-z]{3}-[0-9]{2}-[0-9]{5}$" data-message="Format - CC-XXX-YY-NNNNN">
+                <div [hidden]="crearTrackForm.controls.isrc.valid || crearTrackForm.controls.isrc.pristine"  class="alert alert-danger">
+                 isrc is required
+                </div>
+        </div>
+
+
+<!-- artist_id -->
+
+        <div class="form-group col-md-6" >
+            <label for="artist_id">artist_id</label>
+            <div id="artist_id" class="row">
+ <a class="btn btn-success col-md-2 form-control mr-sm-6" (click)="buscarArtista()">Artista</a>
+            <input class="form-control  col-md-2" type="text" formControlName="artist_id" >
+
+
+                            <input class=" form-control col-md-8 " type="text"   value="{{track.artist_name}}" disabled="disabled">
+                <div [hidden]="crearTrackForm.controls.artist_id.valid || crearTrackForm.controls.artist_id.pristine"  class="alert alert-danger">
+                 Artist is required
+                </div>
+        </div>
+        </div>
+
+
+
+
+
+
+<!-- track_language -->
+
+                        <div class="form-group col-md-4">
+                            <label for="track_language">Language</label>
+                            <select class="form-control selectpicker" data-live-search="true" id="track_language" formControlName="track_language"><option value="Afrikaans">Afrikaans</option><option value="Arabic">Arabic</option><option value="Bulgarian">Bulgarian</option><option value="Cantonese">Cantonese</option><option value="Catalan">Catalan</option><option value="Chinese">Chinese</option><option value="Croatian">Croatian</option><option value="Czech">Czech</option><option value="Danish">Danish</option><option value="Dutch">Dutch</option><option value="English" selected="selected">English</option><option value="Estonian">Estonian</option><option value="Finnish">Finnish</option><option value="French">French</option><option value="German">German</option><option value="Greek">Greek</option><option value="Hebrew">Hebrew</option><option value="Hindi">Hindi</option><option value="Hungarian">Hungarian</option><option value="Icelandic">Icelandic</option><option value="Indonesian">Indonesian</option><option value="Italian">Italian</option><option value="Japanese">Japanese</option><option value="Kazakh">Kazakh</option><option value="Korean">Korean</option><option value="Lao">Lao</option><option value="Latvian">Latvian</option><option value="Lithuanian">Lithuanian</option><option value="Malay">Malay</option><option value="None">None</option><option value="Norwegian">Norwegian</option><option value="Polish">Polish</option><option value="Portuguese">Portuguese</option><option value="Romanian">Romanian</option><option value="Russian">Russian</option><option value="Slovak">Slovak</option><option value="Slovenian">Slovenian</option><option value="Spanish">Spanish</option><option value="Swedish">Swedish</option><option value="Tagalog">Tagalog</option><option value="Tamil">Tamil</option><option value="Telugu">Telugu</option><option value="Thai">Thai</option><option value="Turkish">Turkish</option><option value="Ukrainian">Ukrainian</option><option value="Urdu">Urdu</option><option value="Vietnamese">Vietnamese</option><option value="Zulu">Zulu</option></select>
+                        </div>
+
+
+<!-- composer -->
+
+        <div class="form-group col-md-6" >
+            <label for="composer">composer</label>
+
+            <input class="form-control" type="text" formControlName="composer" >
+                <div [hidden]="crearTrackForm.controls.composer.valid || crearTrackForm.controls.composer.pristine"  class="alert alert-danger">
+                 composer is required
+                </div>
+        </div>
+
+
+<!-- composer -->
+
+        <div class="form-group col-md-6" >
+            <label for="additional_artists">additional_artists</label>
+
+            <input class="form-control" type="text" formControlName="additional_artists" >
+                <div [hidden]="crearTrackForm.controls.additional_artists.valid || crearTrackForm.controls.additional_artists.pristine"  class="alert alert-danger">
+                 additional_artists is required
+                </div>
+        </div>
+
+
+<!-- label_track_id -->
+
+        <div class="form-group col-md-6" >
+            <label for="label_track_id">label_track_id</label>
+
+            <input class="form-control" type="text" formControlName="label_track_id" >
+                <div [hidden]="crearTrackForm.controls.label_track_id.valid || crearTrackForm.controls.label_track_id.pristine"  class="alert alert-danger">
+                 label_track_id is required
+                </div>
+        </div>
+
+
+
+        <!-- cover_song -->
+
+
+            <div class="col-md-12">
+                            <div class="checkbox checkbox-small">
+                                <label><input id="cover_song" formControlName="cover_song" type="checkbox" value="1" /> cover_song</label>
+                            </div>
+           </div>
+
+
+
+
+<!-- track -->
+
+     <div class="form-group col-md-12">
+          <label for="track">track <span class="help-small " ><small>  (Wav - flac )</small></span></label>
+            <div class="row">
+                <span class="btn btn-primary  col-md-2  btn-file mr-sm-2">
+                    Browse  <input  type="file" formControlName="track" (change)="fileChange($event)" ><br />
+                </span>
+                <span class="">
+                    Nombre: {{fileName}} --     Analizando : {{percentDone}}% <br />
+                </span>
+            </div>
+    </div>
+                <div [hidden]="!errorFile"  class="alert alert-danger">
+                    <small>  <small>
+                        Upload Successful of file with size : {{size}} bytes <br>
+                        {{errorFile}}<br>
+                   <!--      The image height is : {{height}} <br>
+                        The image width is : {{width}} <br> -->
+                    </small></small>
+                </div>
+
+<!--
+    <ng-container *ngIf="uploadSuccess">
+      Upload Successful of file with size : {{size}} bytes <br>
+      The image height is : {{height}} <br>
+      The image width is : {{width}} <br>
+    </ng-container>
+ -->
+
+
+
+
+
+<!-- // title:string;
+// track:   File;
+// album_id: number;            //     formData    int
+// explicit:  number;           //      formData    int , x ∈ { 0 , 1 }
+// disc_number:number;          //        formData    int
+// position: number;                //       formData    int
+// isrc:string;                    //        formData    string (US-NNN-YY-DDDDD [will be generated if not provided])
+// artist_id:string;                //        formData    int (will be taken from album if not provided)
+// track_language: string;        //       formData    string
+// composer:string;                //        formData    string
+// additional_artists: string;    //       formData    string
+// label_track_id:string;        //        formData    string
+// cover_song:number;            //        formData    int , x ∈ { 0 , 1 }
+ -->
+
+    </div>
+    </div>
+
+    <button type="submit" [disabled]="!crearTrackForm.valid" (click)="onSubmita()">Submita</button>
+ <!-- <button class="btn btn-outline-secondary calendar" (click)="grabaFormulario()" type="button">grabaFormulario</button> -->
+
+
+    </form>
+
+    </div>
+
+
+
+
+
+
+
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <!-- <button class="btn btn-success" (click)="newAlbum()">Nuevo Album????</button> -->
+</div>
+
+
+
+
+
+  <p>
+  <ngb-alert [dismissible]="false" *ngIf="error"  ><!-- [hidden]="!error"  -->
+    <strong>Warning!</strong>{{error}}
+  </ngb-alert>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+

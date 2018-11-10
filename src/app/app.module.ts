@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { DatosComponent } from './datos/datos.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -25,9 +26,20 @@ import { TrasaccionErrorComponent } from './trasaccion-error/trasaccion-error.co
 import { HttpClientModule,HttpClientXsrfModule } from '@angular/common/http';
 // import { HttpHeaders } from '@angular/common/http';
 import { MailService } from './service/mail.service';
+import { DatePipe } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginGoogleComponent } from './login-google/login-google.component';
+import { ArtistaslistComponent } from './artistas/artistaslist/artistaslist.component';
+import { ArtistascrearComponent } from './artistas/artistascrear/artistascrear.component';
+import { ArtistasmodificarComponent } from './artistas/artistasmodificar/artistasmodificar.component';
+import { LabelListComponent } from './label/label-list/label-list.component';
+import { AlbumListComponent } from './album/album-list/album-list.component';
+import { LabelCrearComponent } from './label/label-crear/label-crear.component';
+import { AlbumCrearComponent } from './album/album-crear/album-crear.component';
+import { PublishAlbumComponent } from './publish/publish-album/publish-album.component';
+import { TrackListComponent } from './track/track-list/track-list.component';
+import { TrackCrearComponent } from './track/track-crear/track-crear.component';
 
 
 
@@ -42,13 +54,24 @@ import { LoginGoogleComponent } from './login-google/login-google.component';
     LaflotaComponent,
     HeaderComponent,
     FooterComponent,
-    LoginGoogleComponent
+    LoginGoogleComponent,
+    ArtistaslistComponent,
+    ArtistascrearComponent,
+    ArtistasmodificarComponent,
+    LabelListComponent,
+    AlbumListComponent,
+    LabelCrearComponent,
+    AlbumCrearComponent,
+    PublishAlbumComponent,
+    TrackListComponent,
+    TrackCrearComponent
 
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
      HttpClientModule,
     HttpClientXsrfModule.withOptions({
@@ -57,7 +80,7 @@ import { LoginGoogleComponent } from './login-google/login-google.component';
   }),
      AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [MailService],
+  providers: [MailService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

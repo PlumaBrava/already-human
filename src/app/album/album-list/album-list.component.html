@@ -1,0 +1,59 @@
+
+<div class="marco">
+
+    <h1 class="tituloLista">Albums <a class="btn btn-primary float-center" (click)="addAlbum()"   role="button" >Add Album </a></h1>
+
+<!-- <h1 class="tituloLista">Album<a class="btn btn-primary float-center" routerLink="/albumCrear"   role="button" >Agregar Album </a></h1>
+<h1 class="tituloLista">Album<a class="btn btn-primary float-center" (click)="GetAlbumByID(45069)"   role="button" >GetAlbumById </a></h1>
+<h1 class="tituloLista">Album<a class="btn btn-primary float-center" (click)="GetGenres()"   role="button" >GetGenres </a></h1>
+<h1 class="tituloLista">Album<a class="btn btn-primary float-center" (click)="GetDsps()"   role="button" >GetDsps </a></h1>
+<h1 class="tituloLista">Album<a class="btn btn-primary float-center" (click)="getPublishers()"   role="button" >getPublishers </a></h1>
+<h1 class="tituloLista">Album<a class="btn btn-primary float-center" (click)="getTracks()"   role="button" >getTracks </a></h1>
+<h1 class="tituloLista">Album<a class="btn btn-primary float-center" (click)="getUsers()"   role="button" >getUsers </a></h1> -->
+
+
+<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [boundaryLinks]="true" [pageSize]="pageSize" (pageChange)="GetAlbum('',page)"></ngb-pagination>
+
+<div class="loader" *ngIf="esperandoDatos"></div>
+
+
+
+<table class="table table-striped table-responsive"  *ngIf="data" >
+    <thead>
+    <tr>
+        <th style="width: 10%"> Id </th>
+        <th style="width: 20%"> Titulo  </th>
+        <th style="width: 10%"> release_date  </th>
+        <th style="width: 10%"> upc  </th>
+        <th style="width: 10%">   </th>
+        <th style="width: 10%">   </th>
+        <th style="width: 10%">   </th>
+        <th style="width: 10%">  </th>
+        <th style="width: 10%">  </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data.body.items" >
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.release_date}}</td>
+            <td>{{item.upc}}</td>
+            <td></td>
+            <td></td>
+
+            <td>    <button class="btn btn-info  mr-sm-2" (click)="modificarAlbum(item)">Edit</button>   </td>
+            <td>    <button class="btn btn-success  mr-sm-2" (click)="publishAlbum(item)">Publish</button>  </td>
+            <td>    <button class="btn btn-danger  mr-sm-2" (click)="deleteAlbum(item)">Delete</button>  </td>
+        </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4">
+            <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator> -->
+        </td>
+    </tr>
+    </tfoot>
+</table>
+
+
+</div>

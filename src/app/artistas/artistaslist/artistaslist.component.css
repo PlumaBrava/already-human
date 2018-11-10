@@ -1,0 +1,11 @@
+@import "../..//app.component.css";
+.marco{
+    padding-top: 10px;
+    padding-left: 10px;
+
+    /*background-color: green;*/
+}
+.Lista{
+    width: 30%;
+    margin-top: 20px;
+}
