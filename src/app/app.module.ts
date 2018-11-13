@@ -43,7 +43,6 @@ import { TrackCrearComponent } from './track/track-crear/track-crear.component';
 
 import { TrackObjectComponent } from './track/track-object/track-object.component';
 import { TrackListAddComponent } from './track/track-list-add/track-list-add.component';
-import { RegisterComponent } from './register/register.component';
 
 
 
@@ -72,9 +71,7 @@ import { RegisterComponent } from './register/register.component';
 
     TrackObjectComponent,
 
-    TrackListAddComponent,
-
-    RegisterComponent
+    TrackListAddComponent
 
   ],
   imports: [
