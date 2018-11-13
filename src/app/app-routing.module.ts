@@ -17,6 +17,7 @@ import { TrackListComponent } from './track/track-list/track-list.component';
 import { TrackCrearComponent } from './track/track-crear/track-crear.component';
 import { TrackObjectComponent } from './track/track-object/track-object.component';
 import { TrackListAddComponent } from './track/track-list-add/track-list-add.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
 { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: 'trackCrear', component: TrackCrearComponent },
   { path: 'trackObject', component: TrackObjectComponent },
   { path: 'tracklistadd', component: TrackListAddComponent},
+  { path: 'register', component: RegisterComponent},
+
   // ,
   // { path: 'datos', component: DatosComponent },
 
