@@ -1,3 +1,50 @@
 <p>
   label-crear works!
 </p>
+<h3>Label New</h3>
+  <div class="loader" *ngIf="esperandoDatos"></div>
+  <div   [hidden]="esperandoDatos" >
+     <div class="row">
+       <form  [formGroup]="crearLabelForm" class="item-block col-lg-8 col-md-8 backRed" >
+
+
+
+            <p> Form  Status: {{ crearLabelForm.status }} </p>
+
+            <!-- Title -->
+                <div class="form-group col-md-12" >
+                  <label for="title">name</label>
+                  <div class="row">
+                    <input class="form-control" type="text" formControlName="name" required>
+                    <div [hidden]="crearLabelForm.controls.name.valid || crearLabelForm.controls.name.pristine"  class="alert alert-danger">
+                          name is required
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                                  <div class="float-left">
+                                  <a routerLink="/labelList" class="btn col-lg-4" rel="cancel">Return To List</a>
+                                   </div>
+                                  <div class="">
+                                    <button type="submit" [disabled]="!crearLabelForm.valid" class="btn btn-primary btn-lg " (click)="onSubmit()">Submit</button>
+                                 <!-- <button class="btn btn-outline-secondary calendar" (click)="grabaFormulario()" type="button">grabaFormulario</button> -->
+                                 </div>
+                               </div>
+        </form>
+    </div>
+    </div>
+<!-- Submited successfully-->
+
+<div [hidden]="!submitted">
+
+ <ngb-alert [type]="'success'" [dismissible]="false"  ><!-- [hidden]="!error"  -->
+    <strong>You submitted successfully!!</strong><p>{{submittedMensage}}</p>
+  </ngb-alert>
+</div>
+
+<!-- Display de un error -->
+  <p>
+  <ngb-alert [type]="'danger'"  [dismissible]="false" *ngIf="error"  ><!-- [hidden]="!error"  -->
+    <strong>Warning!</strong><p>{{error}}</p>
+  </ngb-alert>
+</p>

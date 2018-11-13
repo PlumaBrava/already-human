@@ -14,6 +14,9 @@ labelList: any[] = [];
  artista: Artista = new Artista();
  track: Track = new Track();
 
+ numberDisc:number;
+ numberTracks:number;
+
   constructor() { }
 
 
@@ -139,6 +142,19 @@ sacarArtistaList(artista: any):void {
 
 
   }
+
+setListTrack(numberDisc:number, numberTracks:number){
+    this.numberDisc=numberDisc;
+    this.numberTracks=numberTracks;
+
+}
+
+getListtrack_numberDisc(){
+    return this.numberDisc;
+}
+getListtrack_numberTracks(){
+    return this.numberTracks;
+}
 
 
 getArtistaList(){

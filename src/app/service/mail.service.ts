@@ -248,7 +248,13 @@ setDistributeAlbums(form:FormData): Observable<any>{
 
  };
 
+setTackeDownAlbums(form:FormData): Observable<any>{
+    console.log("setTackeDownAlbums");
 
+
+ return this._http.post(this.URL_SERVER+'setTackeDownAlbums',form);
+
+ };
 
 setTrack(form:FormData): Observable<any>{
     console.log("SetTrack");
@@ -268,7 +274,7 @@ setTrack(form:FormData): Observable<any>{
     return this._http.get(url);
  };
 
-GetDsps(): Observable<any>{
+getDsps(): Observable<any>{
     console.log("GetDsps");
 
 
@@ -319,7 +325,7 @@ GetAlbum(search:any,page:number): Observable<any>{
 
  };
 
-GetAlbumById(album_id:number): Observable<any>{
+getAlbumById(album_id:number): Observable<any>{
     console.log("GetAlbumById");
 
 
@@ -337,6 +343,14 @@ SetAlbum(form:FormData): Observable<any>{
     console.log(form.get('cover'));
 
  return this._http.post(this.URL_SERVER+'setAlbumForm',form);
+
+ };
+
+setLabel(form:FormData): Observable<any>{
+    console.log("setLabel");
+
+
+ return this._http.post(this.URL_SERVER+'setLabel',form);
 
  };
 

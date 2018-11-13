@@ -15,6 +15,8 @@ import { AlbumCrearComponent } from './album/album-crear/album-crear.component';
 import { PublishAlbumComponent } from './publish/publish-album/publish-album.component';
 import { TrackListComponent } from './track/track-list/track-list.component';
 import { TrackCrearComponent } from './track/track-crear/track-crear.component';
+import { TrackObjectComponent } from './track/track-object/track-object.component';
+import { TrackListAddComponent } from './track/track-list-add/track-list-add.component';
 
 const routes: Routes = [
 { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -26,11 +28,14 @@ const routes: Routes = [
   { path: 'artistasModificar', component: ArtistasmodificarComponent },
   { path: 'albumList', component: AlbumListComponent },
   { path: 'albumCrear', component: AlbumCrearComponent },
+  { path: 'albumCrear/:album_id', component: AlbumCrearComponent },
   { path: 'labelList', component: LabelListComponent },
   { path: 'labelCrear', component: LabelCrearComponent },
   { path: 'publish', component: PublishAlbumComponent },
   { path: 'trackList', component: TrackListComponent },
-  { path: 'trackCrear', component: TrackCrearComponent }
+  { path: 'trackCrear', component: TrackCrearComponent },
+  { path: 'trackObject', component: TrackObjectComponent },
+  { path: 'tracklistadd', component: TrackListAddComponent},
   // ,
   // { path: 'datos', component: DatosComponent },
 

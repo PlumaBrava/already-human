@@ -203,3 +203,12 @@
 .icon-album-unpublished, .image-album-status-submit, .media-album-cont .media-status-submit, .table-dsps tbody>tr.dsp-row-submit .status {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAZCAYAAAAv3j5gAAAACXBIW…3390oNp7OSLaJUtoBh3Eorm90yh5sY3lyYtC238qjr/gwAkvGciqtfKBkAAAAASUVORK5CYII=);
 }
+
+.trackCard{
+    /*background:red;*/
+    /*border: 1px solid gray; */
+    /*border: 1px solid #42A948; /* green */
+     border-radius: 2px;
+     margin:2px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}

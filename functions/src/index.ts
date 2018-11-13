@@ -32,7 +32,11 @@ const curl = new (require ('curl-request')) ();
 //  Configuración de variables de entrono
 //  ejemplo para desarrollo
 //  firebase functions:config:set dashgo.url="http://apidev.dashgo.com/api/v1/"
+//  firebase functions:config:set dashgo.dashgoaccesskey="demo-9yKGSuHvuYvY6KFqFAMR"
+//  ejemplo para Prod
+//  firebase functions:config:set dashgo.url="https://api.dashgo.com/api/v1/"
 //  firebase functions:config:set dashgo.dashgoaccesskey="laflota-kladsjf-2229-5582-5222-fkgnnEAD"
+
 //
 //  Con firebase funtions:config:get tenemos un json con los datos.
 //  para acceder hacemos functions.config().someservice.id,
@@ -801,6 +805,123 @@ request(options,  (error, response, body)=> {
 
 });
 
+exports.setLabel =functions.https.onRequest((req, res) => {
+console.log("setLabel");
+
+  cors(req, res, () => {
+
+
+
+
+if (req.method === 'POST') {
+        console.log('Post');
+        const busboy = new Busboy({ headers: req.headers });
+        // This object will accumulate all the uploaded files, keyed by their name
+        const label = {}
+
+
+
+        // This callback will be invoked for each file uploaded
+        busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+            console.log(`File [${fieldname}] filename: ${filename}, encoding: ${encoding}, mimetype: ${mimetype}`);
+            // Note that os.tmpdir() is an in-memory file system, so should only
+            // be used for files small enough to fit in memory.
+            // const filepath = path.join(os.tmpdir(), fieldname);
+            file.on('data',(data)=> {
+              console.log('File data-- ' + fieldname + ': got ' + data.length + ' bytes');
+
+
+              console.log('on archivo ',data);
+            });
+            file.on('end', (datafinal)=> {
+              console.log('datafinal',datafinal);
+
+
+            });
+
+        });
+
+
+
+
+            busboy.on('field', (fieldname, val, fieldnameTruncated, valTruncated)=> {
+
+            label[fieldname] = val;
+            console.log('album field: ',label);
+            });
+
+
+           // busboy.on('data', (fieldname, val, fieldnameTruncated, valTruncated)=> {
+           //      console.log('data [' + fieldname + ']: value: ',val);
+           //        uploads[fieldname] = { file: fieldname }
+           //    });
+                  // This callback will be invoked after all uploaded files are saved.
+          busboy.on('finish', () => {
+
+
+
+                               console.log('label finish :',label);
+
+const options = { method: 'POST',
+  url: URL_API+'labels',
+  headers:
+   {
+
+     'cache-control': 'no-cache',
+     'x-access-key': dashgoAccessKey,
+     'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+  formData:label
+   // { title: 'Juan request2',
+   //   label_id: '141',
+   //   artist_id: '29274',
+   //   release_date: '2018-11-01',
+   //   p_line: '2018 test',
+   //   c_line: '2018 another test',
+   //   explicit: '0',
+   //   cover:
+   //    { value: archivo,
+   //      options: { filename: archivoName, contentType: null }
+   //       }
+   //    }
+       };
+
+request(options,  (error, response, body)=> {
+  console.log('error',error);
+  console.log('body',body);
+  console.log('response',response);
+  if (error){res.status(400).send('Error'+ error);}
+  else {
+    res.status(200).send({'response':response,'body':body});
+  }
+
+  console.log(body);
+});
+
+
+
+            });
+        // The raw bytes of the upload will be in req.rawBody.  Send it to busboy, and get
+        // a callback when it's finished.
+        busboy.end(req.rawBody);
+
+
+
+    } else {
+        // Client error - only support POST
+        res.status(405).end();
+    }
+
+
+});
+
+
+});
+
+
+
+
+
+
 exports.deleteAlbum =functions.https.onRequest((req, res) => {
 console.log("deleteAlbum");
 console.log("req",req);
@@ -858,10 +979,107 @@ exports.setDistributeAlbums =functions.https.onRequest((req, res) => {
         console.log('Post');
         const busboy = new Busboy({ headers: req.headers });
 
-        // const distribute = {};
-        const album = {};
-        const dsp = {};
-        // let archivo=null;
+        const distribute={};
+
+
+
+
+        // This callback will be invoked for each file uploaded
+        busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+            console.log(`File [${fieldname}] filename: ${filename}, encoding: ${encoding}, mimetype: ${mimetype}`);
+            // Note that os.tmpdir() is an in-memory file system, so should only
+            // be used for files small enough to fit in memory.
+            // const filepath = path.join(os.tmpdir(), fieldname);
+            file.on('data',(data)=> {
+                    console.log('File data[' + fieldname + '] got ' + data.length + ' bytes');
+
+            });
+
+            file.on('end', (datafinal)=> {
+                    console.log('datafinal',datafinal);
+            });
+
+
+         });
+
+        busboy.on('field', (fieldname, val, fieldnameTruncated, valTruncated)=> {
+                 console.log(' on fieldname: ',fieldname +' : '+val);
+
+                 distribute[fieldname]=val;
+
+            // if(fieldname==='album_ids'){
+            //   album=val;
+            //   console.log('album field: ',album);
+            // }else {
+
+            // dsp= val;
+            // console.log('dsp field: ',dsp);
+            // }
+            });
+
+
+          busboy.on('finish', () => {
+
+
+                      // const distribute={
+
+                      //   'dsp':dsp,
+                      //   'album_ids':album
+                      // };
+                       console.log('finish distribute: ',distribute);
+                      console.log('distribute :',distribute);
+                      const options = { method: 'POST',
+                                      // json: true,
+                                      url: URL_API+'distribute/albums',
+                                      headers:   {
+
+                                               'cache-control': 'no-cache',
+                                               'x-access-key': dashgoAccessKey,
+                                               'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+                                            formData:distribute
+                                     };
+
+                        request(options,  (error, response, body)=> {
+                        console.log('error',error);
+                        console.log('body',body);
+                        console.log('response',response);
+                            if (error){res.status(400).send('Error'+ error);}
+                            else {
+                                  res.status(200).send({'response':response,'body':body});
+                            }
+
+                         console.log(body);
+                        });
+            });
+
+        busboy.end(req.rawBody);
+
+
+
+    } else {
+        // Client error - only support POST
+        res.status(405).end();
+    }
+
+
+});
+
+});
+
+exports.setTackeDownAlbums =functions.https.onRequest((req, res) => {
+    console.log("setTackeDownAlbums");
+    cors(req, res, () => {
+      console.log("req.body",req.body);
+      console.log("req.body.title",req.body.title);
+
+      if (req.method === 'POST') {
+        console.log('Post');
+        const busboy = new Busboy({ headers: req.headers });
+
+        const distribute={};
+        // let album=null  ;
+        // let dsp=null  ;
+
         let archivoName=null;
 
         // This callback will be invoked for each file uploaded
@@ -885,32 +1103,32 @@ exports.setDistributeAlbums =functions.https.onRequest((req, res) => {
          });
 
         busboy.on('field', (fieldname, val, fieldnameTruncated, valTruncated)=> {
+                 console.log(' on fieldname: ',fieldname +' : '+val);
 
-            if(fieldname==='album_id'){
-              album['album_id']=val;
-              console.log('album field: ',dsp);
-            }else {
+                 distribute[fieldname]=val;
 
-            dsp[fieldname] = val;
-            console.log('dsp field: ',dsp);
-            }
+            // if(fieldname==='album_ids'){
+            //   album=val;
+            //   console.log('album field: ',album);
+            // }else {
+
+            // dsp= val;
+            // console.log('dsp field: ',dsp);
+            // }
             });
 
 
           busboy.on('finish', () => {
-                      console.log('finish archivoName: ',archivoName);
-                      // console.log('finish archivo: ',archivo);
-                      // track['track']= { value: archivo,
-                      //                     options: { filename: archivoName, contentType: null }
-                      //                   }  ;
-                      // distribute={'dsp':dsp,'album_ids':album};
-                      const distribute={
-                        // 'dsp':[{'beatport':true},{'amie':true}],
-                        'dsp':{'beatport':true,'amie':true},
-                        'album_ids':{'album_id':45079}
-                      };
+
+
+                      // const distribute={
+
+                      //   'dsp':dsp,
+                      //   'album_ids':album
+                      // };
+                       console.log('finish distribute: ',distribute);
                       console.log('distribute :',distribute);
-                      const options = { method: 'POST',
+                      const options = { method: 'DELETE',
                                       // json: true,
                                       url: URL_API+'distribute/albums',
                                       headers:   {

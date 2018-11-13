@@ -1,4 +1,20 @@
-import { Component, OnInit,ViewChild, ElementRef  } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-track-object',
+//   templateUrl: './track-object.component.html',
+//   styleUrls: ['./track-object.component.css']
+// })
+// export class TrackObjectComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit() {
+//   }
+
+// }
+
+import { Component, OnInit,ViewChild, ElementRef, Input  } from '@angular/core';
 import { MailService }  from '../../service/mail.service';
 import { MensajesService }  from '../../mensajes/mensajes.service';
 import { NgbDropdownModule,NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
@@ -11,18 +27,21 @@ import { Location } from '@angular/common';
 
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 @Component({
-  selector: 'app-track-crear',
-  templateUrl: './track-crear.component.html',
-  styleUrls: ['./track-crear.component.css']
+  selector: 'app-track-object',
+  templateUrl: './track-object.component.html',
+  styleUrls: ['./track-object.component.css']
 })
-export class TrackCrearComponent implements OnInit {
+export class TrackObjectComponent implements OnInit {
+// @Input() numberDisk:string;
+// @Input() numberTracks:string;
+@Input() track:Track;
 
 file: File;
-track: Track = new Track();
+// track: Track = new Track();
 album: Album = new Album();
 artist:Artista= new Artista();
   submitted = false;
-  submittedMensage = null;
+  submittedMensage=null;
   error=null;
 //Maximo tamaño del archivo permitido
   MaxSizeFile:number=100000000000000;
@@ -104,7 +123,7 @@ esperandoDatos:boolean=false;
 
 
       //   );
-    this.track=this.mensageService.getTrack();
+    // this.track=this.mensageService.getTrack();
     console.log("track: ", this.track);
 
     // this.mensageService.getArtitaObs().subscribe( data => {
@@ -121,10 +140,10 @@ esperandoDatos:boolean=false;
 
     //         }
     //      )
-this.album=this.mensageService.getAlbum();
+// this.album=this.mensageService.getAlbum();
 console.log("album: ", this.album);
 
-    this.artist=this.mensageService.getArtista();
+    // this.artist=this.mensageService.getArtista();
     console.log("artist: ", this.artist);
 
 
@@ -146,21 +165,8 @@ console.log("album: ", this.album);
        //      }
        //      });
 
-      if(this.track.id!=null){ // track Existente
-             console.log(' track Existente',this.track);
-
-          this.getArtistaById(this.track.artist_id);
-          if(this.track.track_file.filename!=null){
-          this.fileName=this.track.track_file.filename;
-          this.album.id=this.track.album_id;
-          }
-      }else{
      console.log('track nuevo');
-this.track.artist_id=this.album.artist_id;
-this.track.track_language=this.album.language;
 
-this.getArtistaById(this.track.artist_id);
-      }
 this.crearTrackForm.patchValue(this.track);
   }
 
@@ -173,49 +179,30 @@ fileChange(event) {
        console.log('this.file',this.file);
        let fileSize:number=fileList[0].size;
        console.log('fileSize: '+fileSize);
-   }
-
-
-
-
-
-  this.percentDone = 100;
-   this.uploadSuccess = true;
-   let trackFile:any = event.target.files[0];
-   this.size = trackFile.size;
-   this.fileName = trackFile.name;
-
-   this.verifyAudioFile(this.file);
+       }
+    this.percentDone = 100;
+    this.uploadSuccess = true;
+    let trackFile:any = event.target.files[0];
+    this.size = trackFile.size;
+    this.fileName = trackFile.name;
+    this.verifyAudioFile(this.file);
 
     // WAV, FLAC
    let fr = new FileReader;
    fr.onload = () => { // when file has loaded
     var img = new Image();
 
-    img.onload = () => {
-        this.width = img.width;
-        this.height = img.height;
+        img.onload = () => {
+            this.width = img.width;
+            this.height = img.height;
+        };
+
     };
-
-// console.log( "fr.result", fr.result);
-
-
-    // img.src = window.URL ; // This is the data URL
-    // img.src = Url.  createObjectURL(fr.result); // This is the data URL
-    // img.src =; // This is the data URL
-
-    // img.src =this.domSanitizer.bypassSecurityTrustUrl(image);
-    // img.src = this.domSanitizer.bypassSecurityTrustResourceUrl(fr.result);
-                 // + toReturnImage.base64string);
-
-
-
-    // img.set = fr.result; // This is the data URL
-};
 
   fr.readAsDataURL(trackFile);
    this.crearTrackForm.value.track = "";
-  }
+};
+
 
 verifyAudioFile(file:File):boolean{
     let verify:boolean=true;
@@ -247,15 +234,12 @@ onSubmita() {
   console.warn('title',this.crearTrackForm.value.title);
   console.warn('file',this.file);
   console.warn('isrc',this.crearTrackForm.value.isrc);
-  console.warn('artist_id',this.track.artist_id);
-  console.warn('album_id',String(this.album.id));
   this.error+null;
 
   let formData:FormData = new FormData();
 
         formData.append('title',this.crearTrackForm.value.title);
-        formData.append('album_id',String(this.album.id));
-        formData.append('artist_id',String(this.track.artist_id));
+        formData.append('album_id',String(this.track.album_id));
         formData.append('track',this.file);
          // formData.append('album_id',this.crearTrackForm.value.album_id);
         if(this.crearTrackForm.value.explicit){
@@ -268,13 +252,15 @@ onSubmita() {
         formData.append('position',this.crearTrackForm.value.position);
         if(this.crearTrackForm.value.isrc!=""){
             formData.append('isrc',this.crearTrackForm.value.isrc);
-        } if(this.crearTrackForm.value.track_language!=""){
+        } if(this.crearTrackForm.value.isrc!=""){
+            formData.append('artist_id',this.crearTrackForm.value.artist_id);
+        } if(this.crearTrackForm.value.isrc!=""){
             formData.append('track_language',this.crearTrackForm.value.track_language);
-        } if(this.crearTrackForm.value.composer!=""){
+        } if(this.crearTrackForm.value.isrc!=""){
             formData.append('composer',this.crearTrackForm.value.composer);
-        } if(this.crearTrackForm.value.additional_artists!=""){
+        } if(this.crearTrackForm.value.isrc!=""){
             formData.append('additional_artists',this.crearTrackForm.value.additional_artists);
-        } if(this.crearTrackForm.value.label_track_id!=""){
+        } if(this.crearTrackForm.value.isrc!=""){
             formData.append('label_track_id',this.crearTrackForm.value.label_track_id);
         }
         if(this.crearTrackForm.value.cover_song){
@@ -288,8 +274,8 @@ onSubmita() {
    if(this.track.id==null) {
        this.mailService.setTrack(formData).subscribe(
               data => {
-                 this.submitted = true;
-                   this.esperandoDatos=false;
+                     this.submitted = true;
+                     this.esperandoDatos=false;
                     console.log(data);
 
                     if (data.response.body){
@@ -314,12 +300,14 @@ onSubmita() {
         formData.append('id',String(this.track.id));
         this.mailService.updateTrack(formData).subscribe(
               data => {
-                 this.submitted = true;
-                    this.esperandoDatos=false;
+                      this.submitted = true;
+                         this.esperandoDatos=false;
+
                     console.log(data);
 
                     if (data.response.body){
-                       this.submittedMensage=data.response.body;
+                      this.submittedMensage=data.response.body;
+
                     }
                   },
                error =>{
@@ -370,17 +358,8 @@ grabaFormulario(){
   this.track.artist_name=this.crearTrackForm.value.artist_name,
   this.track.cover_song=this.crearTrackForm.value.cover_song,
 
-
-
-
-
-
   // todo: grabar file
   this.mensageService.setTrack(this.track);
-}
-
-logTrack(){
-  console.log(this.track)
 }
 
 getArtistaById(id:any){

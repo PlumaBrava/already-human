@@ -29,7 +29,10 @@ export class Album {
   c_line_yyyy:string;
   c_line_text:string;
 
-
+// Estado
+// Estado=0, nuevo
+// 'En_Edicion=1' indintidica cuando se está editando un album,
+estado:number=0;
 
 }
 

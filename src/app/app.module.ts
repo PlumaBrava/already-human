@@ -41,6 +41,9 @@ import { PublishAlbumComponent } from './publish/publish-album/publish-album.com
 import { TrackListComponent } from './track/track-list/track-list.component';
 import { TrackCrearComponent } from './track/track-crear/track-crear.component';
 
+import { TrackObjectComponent } from './track/track-object/track-object.component';
+import { TrackListAddComponent } from './track/track-list-add/track-list-add.component';
+
 
 
 @NgModule({
@@ -64,7 +67,11 @@ import { TrackCrearComponent } from './track/track-crear/track-crear.component';
     AlbumCrearComponent,
     PublishAlbumComponent,
     TrackListComponent,
-    TrackCrearComponent
+    TrackCrearComponent,
+
+    TrackObjectComponent,
+
+    TrackListAddComponent
 
   ],
   imports: [

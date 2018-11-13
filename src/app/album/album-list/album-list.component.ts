@@ -3,6 +3,7 @@ import { MailService }  from '../../service/mail.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MensajesService }  from '../../mensajes/mensajes.service';
 import {Router} from '@angular/router';
+import { Album } from '../album';
 @Component({
   selector: 'app-album-list',
   templateUrl: './album-list.component.html',
@@ -69,11 +70,17 @@ addAlbum(){
   this.router.navigate(['./albumCrear']);
 }
 
-modificarAlbum(album:any){
+modificarAlbum(album:Album){
 
   console.log("modificarAlbum",album);
-  this.mensageService.setAlbum(album);
-  this.router.navigate(['./albumCrear']);
+
+// Solo se envía el Id del formulario, para que al refrescar la página tengamos acceso a los datos desde el server
+// Si le pasamos el album, al refescar deberíamos enviar nuevamente los datos buscando en el listado.
+
+// Se limpia el album para indicar que se comienza una nueva edición del formulario
+this.mensageService.clearAlbum();
+
+  this.router.navigate(['./albumCrear/'+album.id]);
 
 
 }
@@ -101,11 +108,11 @@ console.log("publishAlbum",album);
 }
 
 
-GetAlbumByID(album_id:number){
+getAlbumByID(album_id:number){
   console.log("GetAlbumByID");
   console.log("album_id: "+album_id);
 
-  this.mailService.GetAlbumById(album_id).subscribe(
+  this.mailService.getAlbumById(album_id).subscribe(
   data => {
     // this.data = data;
     // // this.collectionSize = data.body.itemsCount;
@@ -134,7 +141,7 @@ GetDsps(){
   console.log("GetDsps");
 
 
-  this.mailService.GetDsps().subscribe(
+  this.mailService.getDsps().subscribe(
   data => {
     // this.data = data;
     // // this.collectionSize = data.body.itemsCount;

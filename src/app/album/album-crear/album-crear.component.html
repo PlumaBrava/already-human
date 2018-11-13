@@ -47,7 +47,8 @@
                         <input class=" form-control col-md-3 mr-sm-2" type="text" formControlName="label_id" [hidden]="true"  >
                           <!-- <a class="btn btn-success col-md-2 form-control mr-sm-2" routerLink="/labelList">Label</a> -->
                           <a class="btn btn-success col-md-2 form-control mr-sm-2" (click)="buscarLabel()">Label</a>
-                                <input class=" form-control col-md-3 " type="text" value="{{album.labelName}}" disabled="disabled">
+                                <input class=" form-control col-md-3 " type="text" value="{{album.labelName}}"
+                                [ngClass]="{'valid': album.labelName, 'invalid': !album.labelName}" disabled="disabled" >
                       </div>
                         <div [hidden]="crearAlbumForm.controls.label_id.valid || crearAlbumForm.controls.label_id.pristine"  class="alert alert-danger">
                             Label is required
@@ -65,7 +66,8 @@
                                <!-- <a class="btn btn-success col-md-2 form-control mr-sm-2" routerLink="/artistasList">Artista</a> -->
                                <a class="btn btn-success col-md-2 form-control mr-sm-2" (click)="buscarArtista()">Artista</a>
 
-                            <input class=" form-control col-md-3 " type="text"   value="{{album.artistaName}}" disabled="disabled">
+                            <input class=" form-control col-md-3 " type="text"   value="{{album.artistaName}}" disabled="disabled"
+                            [ngClass]="{'valid': album.artistaName, 'invalid': !album.artistaName}">
                               </div>
                                 <div [hidden]="crearAlbumForm.controls.label_id.valid || crearAlbumForm.controls.label_id.pristine"  class="alert alert-danger">
                               artist_id is required
@@ -139,7 +141,7 @@
 
 
                           <div [hidden]="crearAlbumForm.controls.release_date.valid || crearAlbumForm.controls.release_date.pristine"  class="alert alert-danger">
-                                    Ingrese una fecha Correcta <br>
+                                    Invalid Date <br>
 
                                     </div>
 
@@ -272,6 +274,9 @@
 
                                                                           </div>
 
+
+
+
                                                                           <div class="col-md-7">
                                                                               <input class="form-control required" id="album_p_line" name="album[p_line]" size="30" type="text" formControlName="p_line_text" />
                                                                           </div>
@@ -399,6 +404,13 @@
                                                                                                       </div>
                                                                               </div>
 
+ <div class="row alert alert-danger"
+  [hidden]="crearAlbumForm.controls.p_line_yyyy.valid || crearAlbumForm.controls.p_line_yyyy.pristine ||
+crearAlbumForm.controls.p_line_text.valid || crearAlbumForm.controls.p_line_text.pristine"
+    class="alert alert-danger">
+                                    Invalid p_line <br>
+
+                                    </div>
 
 
 
@@ -727,7 +739,7 @@
 
 
 <!-- <div class="container"> -->
-    <div class="row" style="margin:0;padding:0;display:inline" class="item-block col-lg-4 col-md-4 backBlue">
+    <div class="row" style="margin:0;padding:0;display:inline" class="item-block col-lg-4 col-md-4 backBlue" *ngIf="album.id" >
       <!--   <form accept-charset="UTF-8" action="https://beta.dashgo.com/juan/media/album_update/45093" class="edit_album" data-remote="true" enctype="multipart/form-data" id="edit_album_45093" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="heiUj/U94qXvi4ZU6UO7QNWdEyReYiW9iUEKF9lP6QI=" /></div> -->
 
 <!-- </form> -->
@@ -737,11 +749,13 @@
             <div class="item">
                     <table class="table table-condensed table-custom" id="track-wrapper-box">
                       <thead>
-                        <th width="30%">Track #</th> <!-- width="20%" -->
-                        <th>Track Title</th>
+                        <th width="10%">Disk #</th> <!-- width="20%" -->
+                        <th width="10%">Track #</th> <!-- width="20%" -->
+                        <th>Title</th>
                       </thead>
                       <tbody>
                           <tr  *ngFor="let item of AlbumTracks" >
+                              <td>{{item.disc_number}}</td>
                               <td>{{item.position}}</td>
                               <td>{{item.title}}</td>
   <td>    <button class="btn btn-info  mr-sm-2" (click)="modificarTrack(item)">Edit</button>   </td>
@@ -749,43 +763,69 @@
                       </tbody>
                     </table>
 
-    <div class="form-actions">
-        <!-- <a href="https://beta.dashgo.com/juan/media/tracks_list?album=45093" class="btn btn-info pull-right">View all tracks</a> -->
-        <input class="btn btn-info pull-right" name="commit" (click)="addTrack(album)" *ngIf="album.id" value="Add Tracks" />
+    <div >
+
+        <button  class="btn btn-info pull-right"  (click)="addTrack(album)"  > Add Tracks</button>
     </div>
-<!-- <div class="pull-right">
+
+     <div class=" row">
+        <div class="col-md-3">
+           <label> Disc Number </label>
+
+             <select class="form-control selectpicker" id="disckNumber" [(ngModel)]="disckNumber">
+
+                <option selected="selected" value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+
+               </select>
+        </div>
+        <div class="col-md-3">
+           <label> Tracks Number </label>
+
+             <select class="form-control selectpicker" id="traksNumber" [(ngModel)]="traksNumber">
+
+                <option selected="selected" value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
 
 
+               </select>
+        </div>
+         <div class="col-md-3 d-flex align-items-end ">
+        <button  class="btn btn-info mt-auto  " (click)="addTrackList(album,disckNumber,traksNumber)"  >Add List of Tracks</button>
+      </div>
+    </div>
 
-
-
-                        </div> -->
-
-<!--          <div class="item-block col-lg-12 col-md-12">
-                <div class="item">
-                    <div class="row">
-
-
-
-
-                    <div class="form-actions">
-                        <div class="pull-left">
-
-                        </div>
-
-                        <div class="pull-right">
-                            <input class="btn btn-info btn-lg btn-submit" name="commit" (click)="addTrack(album)" *ngIf="album.id" value="Add Tracks" />
-                            <input class="btn btn-primary btn-lg btn-submit" name="commit" type="submit" value="Save and Finish" />
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
- -->
 
 
             </div>
@@ -815,16 +855,15 @@
 <!-- Submited successfully-->
 
 <div [hidden]="!submitted">
-  <h4>You submitted successfully!</h4>
-  <button class="btn btn-success" (click)="newAlbum()">Nuevo Album????</button>
+
+ <ngb-alert [type]="'success'" [dismissible]="false"  ><!-- [hidden]="!error"  -->
+    <strong>You submitted successfully!!</strong><p>{{submittedMensage}}</p>
+  </ngb-alert>
 </div>
 
 <!-- Display de un error -->
   <p>
-  <ngb-alert [dismissible]="false" *ngIf="error"  ><!-- [hidden]="!error"  -->
+  <ngb-alert [type]="'danger'"  [dismissible]="false" *ngIf="error"  ><!-- [hidden]="!error"  -->
     <strong>Warning!</strong><p>{{error}}</p>
   </ngb-alert>
 </p>
-
-
-

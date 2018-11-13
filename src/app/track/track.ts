@@ -19,7 +19,7 @@ cover_song:number;            //        formData    int , x ∈ { 0 , 1 }
 artist_name:string;
 file_name:string;
 
-
+track_file:{filename:string};
 }
 
 

@@ -1,0 +1,10 @@
+<h1>
+  Album: {{album.title}}
+</h1>
+<div *ngIf='trackArray' >
+<div *ngFor=" let tracka of trackArray">
+
+    <app-track-object [track]="tracka"></app-track-object>
+    <!-- <app-track-object ></app-track-object> -->
+</div>
+</div>
