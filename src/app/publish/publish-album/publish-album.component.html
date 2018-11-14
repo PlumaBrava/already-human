@@ -5,17 +5,17 @@
             <div class="item statistics-summary">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>Assign Distributors</h3>
+                        <h3>Elegir Tiendas</h3>
+
+                        <h6>al seleccionar las tiendas y hacer click en publish el album debería quedar un interno TO PARA PUBLICAR, nosotros lo revisamos y lo terminamos de publicar. El usuario no debería poder modificar más los datos y archivos del album.</h6>
+
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                            <div class="btn-group" role="group" aria-label="...">
-                                <span class="select-all btn btn-default" (click)="selectAllDsps()">Select All</span>
-                                <span class="select-none btn btn-default" (click)="selectNoneDsps()">Select None</span>
-                            </div>
+                           
 
-                            <span class="btn btn-primary btn-publish" (click)="publish()">Publish</span>
-                            <span class="btn btn-warning btn-takedown" (click)="takeDown()">Takedown</span>
+                            <span class="btn btn-primary btn-publish" style="display:none" (click)="publish()">Publish</span>
+                            <span class="btn btn-warning btn-takedown" style="display:none" (click)="takeDown()">Takedown</span>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,10 @@
                     </div>
 
                 </div>
-
+                <div class="btn-group" role="group" aria-label="...">
+                    <span class="select-all btn btn-default" (click)="selectAllDsps()">Select All</span>
+                    <span class="select-none btn btn-default" (click)="selectNoneDsps()">Select None</span>
+                </div>
 
 <div class="row" >
 
@@ -142,15 +145,36 @@
 
    <br>
 
+<div>
+ 
+        <li class="terms_checkbox">
+                <input type="checkbox" 
+                    id="checkbox_terms" name="terms" ng-model="agreement" required />
+                <label for="checkbox_terms"> He revisado los formularios y aseguro que los datos y archivos proporcionados son correctos.</label>
+             </li>
+                             <li class="terms_checkbox">
+                                <input type="checkbox" 
+                                    id="checkbox_terms" name="terms" ng-model="agreement" required />
+                                <label for="checkbox_terms"> I recorded this music, and am authorized to sell it in stores worldwide & collect all royalties. </label>
+                             </li>
+                             <li class="terms_checkbox">
+                                <input type="checkbox" 
+                                    id="checkbox_terms" name="terms" ng-model="agreement" required />
+                                <label for="checkbox_terms"> I'm not using any other artist's name in my name, song titles, or album title, without their approval. </label>
+                             </li>
+                             <li class="terms_checkbox">
+                                    <input type="checkbox" 
+                                        id="checkbox_terms" name="terms" ng-model="agreement" required />
+                                    <label for="checkbox_terms"> He leido y acepto los terminos del <a href="blabla.com"> Acuerdo de Distribución de La Flota</a> </label>
+                                 </li>
 
+</div>
 
  <div class="row">
  <div class="col-md-6 "> </div>
  <div class="col-md-6 pull-right">
                         <!-- <div class="pull-right"> -->
                             <div class="btn-group" role="group" aria-label="...">
-                                <span class="select-all btn btn-default" (click)="selectAllDsps()">Select All</span>
-                                <span class="select-none btn btn-default" (click)="selectNoneDsps()">Select None</span>
                             </div>
 
                             <span class="btn btn-primary btn-publish" (click)="publish()">Publish</span>

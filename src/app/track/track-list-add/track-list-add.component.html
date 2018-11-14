@@ -1,6 +1,62 @@
-<h1>
-  Album: {{album.title}}
-</h1>
+<div class="row" style="margin:0;padding:0;display:inline" class="item-block col-lg-4 col-md-4 backBlue" *ngIf="album.id" >
+  <!--   <form accept-charset="UTF-8" action="https://beta.dashgo.com/juan/media/album_update/45093" class="edit_album" data-remote="true" enctype="multipart/form-data" id="edit_album_45093" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="heiUj/U94qXvi4ZU6UO7QNWdEyReYiW9iUEKF9lP6QI=" /></div> -->
+
+<!-- </form> -->
+
+<h3>Nuevo Lanzamiento: {{album.title}}</h3>
+<h6>Paso 2/3, información de canciones y archivos de audio</h6>
+ <div class=" row">
+  
+    <div class="col-md-3">
+       <label> Número de tracks (al elegir el numero y hacer click deberían aparecer los cargadores de canciones abajo) </label>
+
+         <select class="form-control selectpicker" id="traksNumber" [(ngModel)]="traksNumber">
+
+            <option selected="selected" value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+
+
+           </select>
+    </div>
+     <div class="col-md-3 d-flex align-items-end ">
+    <button  class="btn btn-info mt-auto  " (click)="addTrackList(album,disckNumber,traksNumber)"  >Add List of Tracks</button>
+  </div>
+</div>
+
+
+
+        </div>
+
+        <div class="item-hr clear"><hr class="dark-hr" /></div>
+
 <div *ngIf='trackArray' >
 <div *ngFor=" let tracka of trackArray">
 
@@ -8,3 +64,26 @@
     <!-- <app-track-object ></app-track-object> -->
 </div>
 </div>
+
+<h1> Tracks cargados correctamente</h1><h6>en esta tabla se muestra lo que se cargó y abajo hay un boton de siguiente para pasar al Paso 3/3 de publish.
+  <br>si mas tarde se quiere modificar los tracks cargados en vez de modificarlos individualmente se puede venir a esta pantalla? que este rellena con los datos cargados y se pueda modificar y salvar?
+</h6>
+    <div class="item-block col-lg-12 col-md-12 sidebar-wrapper">
+        <div class="item">
+                <table class="table table-condensed table-custom" id="track-wrapper-box">
+                  <thead>
+                    <th width="10%">Disk #</th> <!-- width="20%" -->
+                    <th width="10%">Track #</th> <!-- width="20%" -->
+                    <th>Title</th>
+                  </thead>
+                  <tbody>
+                      <tr  *ngFor="let item of AlbumTracks" >
+                          <td>{{item.disc_number}}</td>
+                          <td>{{item.position}}</td>
+                          <td>{{item.title}}</td>
+<td>    <button class="btn btn-info  mr-sm-2" (click)="modificarTrack(item)">Edit</button>   </td>
+                      </tr>
+                  </tbody>
+                </table>
+
+                <span class="btn btn-primary btn-publish"  routerLink="/albumCrear/">Atrás</span><button class="btn btn-success  mr-sm-2" routerLink="/publish">Confirmar y seguir</button>
