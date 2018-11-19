@@ -1,0 +1,876 @@
+
+<div class="container">
+    <!-- <div class="nav-scroller bg-white shadow-sm">
+          <nav class="nav nav-underline">
+            <a class="nav-link active" href="#">Dashboard</a>
+            <a class="nav-link" href="#">
+              Friends
+              <span class="badge badge-pill bg-light align-text-bottom">27</span>
+            </a>
+            <a class="nav-link" href="#">Explore</a>
+            <a class="nav-link" href="#">Suggestions</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+          </nav>
+        </div> -->
+    
+    <h3>Nuevo Lanzamiento</h3>
+    <h6>Paso 1/3, información e imagen de arte de tapa</h6>
+    
+      <div class="loader" *ngIf="esperandoDatos"></div>
+      <div   *ngIf="album" [hidden]="esperandoDatos" >
+         <div class="row">
+           <form  [formGroup]="crearAlbumForm" class="item-block col-lg-8 col-md-8 backRed" >
+    
+              <div >
+    
+    
+               
+                  <!-- Label -->
+    
+                      <div class="form-group col-md-12">
+                          <label for="label_id">Label debería ser fijo La Flota y hidden (si es que es posible que creemos "User" y que estos Users tengan nombres de artista y albums linkeados a sus cuentas por API, sino creamos Labels para nuestro clientes</label>
+    
+                          <div class="row">
+                            <input class=" form-control col-md-3 mr-sm-2" type="text" formControlName="label_id" [hidden]="true"  >
+                              <!-- <a class="btn btn-success col-md-2 form-control mr-sm-2" routerLink="/labelList">Label</a> -->
+                              <a class="btn btn-success col-md-2 form-control mr-sm-2" (click)="buscarLabel()">Label</a>
+                                    <input class=" form-control col-md-3 " type="text" value="{{album.labelName}}"
+                                    [ngClass]="{'valid': album.labelName, 'invalid': !album.labelName}" disabled="disabled" >
+                          </div>
+                            <div [hidden]="crearAlbumForm.controls.label_id.valid || crearAlbumForm.controls.label_id.pristine"  class="alert alert-danger">
+                                Label is required
+                          </div>
+                     </div>
+    
+    
+                    <!-- Artista -->
+    
+                         <div class="form-group col-md-12">
+                              <label for="artist_id">Artista (debería mostrar la lista de nombres disponibles para el User/Label que esta subiendo) y/o agregar/comprar un nuevo slot de artista</label>
+                              <div class="row">
+    
+                                <input class=" form-control col-md-3 mr-sm-2" type="text" formControlName="artist_id"  [hidden]="true"  >
+                                   <!-- <a class="btn btn-success col-md-2 form-control mr-sm-2" routerLink="/artistasList">Artista</a> -->
+                                   <a class="btn btn-success col-md-2 form-control mr-sm-2" (click)="buscarArtista()">Artista</a>
+    
+                                <input class=" form-control col-md-3 " type="text"   value="{{album.artistaName}}" disabled="disabled"
+                                [ngClass]="{'valid': album.artistaName, 'invalid': !album.artistaName}">
+                                  </div>
+                                    <div [hidden]="crearAlbumForm.controls.label_id.valid || crearAlbumForm.controls.label_id.pristine"  class="alert alert-danger">
+                                  artist_id is required
+                                  </div>
+    
+                        </div>
+                        
+                    <!-- Title -->
+                    
+                        <div class="form-group col-md-12" >
+                          <label for="title">Título del Lanzamiento</label>
+                          <div class="row">
+                            <input class="form-control" type="text" formControlName="title" required>
+                            <div [hidden]="crearAlbumForm.controls.title.valid || crearAlbumForm.controls.title.pristine"  class="alert alert-danger">
+                                  title is required
+                            </div>
+                            </div>
+                        </div>
+    
+    
+                        <!-- Cover -->
+    
+                             <div class="form-group col-md-12">
+                                  <label for="artist_id">Arte de Tapa <span class="help-small " ><small>  (JPEG cuadrado, tamaño mínimo 3000x3000px)</small></span></label>
+                                  <div class="row">
+                                    <span class="btn btn-primary  col-md-2  btn-file mr-sm-2">
+                                      Buscar  <input  type="file" formControlName="fileImagen" (change)="fileChange($event)" ><br />
+                                    </span>
+                                    <span class="">
+                                       Nombre: {{fileName}} --     Analizando : {{percentDone}}% CUANDO SE SUBE LA IMAGEN PODRIA APARECER EN CHIQUITO<br />
+                                    </span>
+    
+                                      </div>
+                                        <div [hidden]="crearAlbumForm.controls.label_id.valid || crearAlbumForm.controls.label_id.pristine"  class="alert alert-danger">
+                                          <small>  <small>
+                                      Upload Successful of file with size : {{size}} bytes <br>
+                              The image height is : {{height}} <br>
+                              The image width is : {{width}} <br>
+                               </small></small>
+                                      </div>
+    
+                            </div>
+    
+    
+                            <ng-container *ngIf="uploadSuccess">
+                              Upload Successful of file with size : {{size}} bytes <br>
+                              The image height is : {{height}} <br>
+                              The image width is : {{width}} <br>
+                            </ng-container>
+    
+    
+    
+    
+    
+    
+                          <!-- Release Date -->
+    
+                           <div class="form-group  col-md-6">
+    
+    
+    
+    
+                                 <label for="release_date" class="mr-sm-2">Fecha de Lanzamiento&nbsp;
+                                   <span class="help-small " ><small>  (YYYY-MM-DD)</small></span></label>
+    
+    
+                                 <div class=" row">
+                                 <div class=" form-inline">
+                            <div class="form-group">
+                              <div class="input-group">
+    
+                                <input  class="form-control mb-2 " placeholder="yyyy-mm-dd"  formControlName="release_date"
+                                       name="release_date"   ngbDatepicker #d="ngbDatepicker" id="release_date"  #spy  >
+                                       <!-- name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" [formControl]="crearAlbumForm.controls.release_date"> -->
+                                <div class="input-group-append mb-2 mr-sm-2">
+                                  <button class="btn btn-outline-secondary calendar  fa fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+    
+                                </div>
+                                 </div>
+                                 </div>
+                                 </div>
+    
+    
+                              <div [hidden]="crearAlbumForm.controls.release_date.valid || crearAlbumForm.controls.release_date.pristine"  class="alert alert-danger">
+                                        Invalid Date <br>
+    
+                                        </div>
+    
+    
+                              </div>
+    
+                          </div>
+    
+    
+    
+    
+                                              <!-- p_line  c_line -->
+    
+    
+                                                <div class="row">
+                                                                      <!-- Prepare P/C line -->
+    
+                                                                      <!-- P-line -->
+                                                                      <div class="form-group col-md-6 required">
+                                                                          <label>
+                                                                              Publisher&nbsp;
+                                                                               <span class="help-small " ><small> (YYYY Copyright)</small></span>
+    
+                                                                          </label>
+    
+                                                                          <div class="row">
+                                                                              <div class="col-md-5">
+                                                                                  <select class="form-control selectpicker" id="date_p_line_year" formControlName="p_line_yyyy">
+                                              <option value="2019">2019</option>
+                                              <option selected="selected" value="2018">2018</option>
+                                              <option value="2017">2017</option>
+                                              <option value="2016">2016</option>
+                                              <option value="2015">2015</option>
+                                              <option value="2014">2014</option>
+                                              <option value="2013">2013</option>
+                                              <option value="2012">2012</option>
+                                              <option value="2011">2011</option>
+                                              <option value="2010">2010</option>
+                                              <option value="2009">2009</option>
+                                              <option value="2008">2008</option>
+                                              <option value="2007">2007</option>
+                                              <option value="2006">2006</option>
+                                              <option value="2005">2005</option>
+                                              <option value="2004">2004</option>
+                                              <option value="2003">2003</option>
+                                              <option value="2002">2002</option>
+                                              <option value="2001">2001</option>
+                                              <option value="2000">2000</option>
+                                              <option value="1999">1999</option>
+                                              <option value="1998">1998</option>
+                                              <option value="1997">1997</option>
+                                              <option value="1996">1996</option>
+                                              <option value="1995">1995</option>
+                                              <option value="1994">1994</option>
+                                              <option value="1993">1993</option>
+                                              <option value="1992">1992</option>
+                                              <option value="1991">1991</option>
+                                              <option value="1990">1990</option>
+                                              <option value="1989">1989</option>
+                                              <option value="1988">1988</option>
+                                              <option value="1987">1987</option>
+                                              <option value="1986">1986</option>
+                                              <option value="1985">1985</option>
+                                              <option value="1984">1984</option>
+                                              <option value="1983">1983</option>
+                                              <option value="1982">1982</option>
+                                              <option value="1981">1981</option>
+                                              <option value="1980">1980</option>
+                                              <option value="1979">1979</option>
+                                              <option value="1978">1978</option>
+                                              <option value="1977">1977</option>
+                                              <option value="1976">1976</option>
+                                              <option value="1975">1975</option>
+                                              <option value="1974">1974</option>
+                                              <option value="1973">1973</option>
+                                              <option value="1972">1972</option>
+                                              <option value="1971">1971</option>
+                                              <option value="1970">1970</option>
+                                              <option value="1969">1969</option>
+                                              <option value="1968">1968</option>
+                                              <option value="1967">1967</option>
+                                              <option value="1966">1966</option>
+                                              <option value="1965">1965</option>
+                                              <option value="1964">1964</option>
+                                              <option value="1963">1963</option>
+                                              <option value="1962">1962</option>
+                                              <option value="1961">1961</option>
+                                              <option value="1960">1960</option>
+                                              <option value="1959">1959</option>
+                                              <option value="1958">1958</option>
+                                              <option value="1957">1957</option>
+                                              <option value="1956">1956</option>
+                                              <option value="1955">1955</option>
+                                              <option value="1954">1954</option>
+                                              <option value="1953">1953</option>
+                                              <option value="1952">1952</option>
+                                              <option value="1951">1951</option>
+                                              <option value="1950">1950</option>
+                                              <option value="1949">1949</option>
+                                              <option value="1948">1948</option>
+                                              <option value="1947">1947</option>
+                                              <option value="1946">1946</option>
+                                              <option value="1945">1945</option>
+                                              <option value="1944">1944</option>
+                                              <option value="1943">1943</option>
+                                              <option value="1942">1942</option>
+                                              <option value="1941">1941</option>
+                                              <option value="1940">1940</option>
+                                              <option value="1939">1939</option>
+                                              <option value="1938">1938</option>
+                                              <option value="1937">1937</option>
+                                              <option value="1936">1936</option>
+                                              <option value="1935">1935</option>
+                                              <option value="1934">1934</option>
+                                              <option value="1933">1933</option>
+                                              <option value="1932">1932</option>
+                                              <option value="1931">1931</option>
+                                              <option value="1930">1930</option>
+                                              <option value="1929">1929</option>
+                                              <option value="1928">1928</option>
+                                              <option value="1927">1927</option>
+                                              <option value="1926">1926</option>
+                                              <option value="1925">1925</option>
+                                              <option value="1924">1924</option>
+                                              <option value="1923">1923</option>
+                                              <option value="1922">1922</option>
+                                              <option value="1921">1921</option>
+                                              <option value="1920">1920</option>
+                                              </select>
+    
+                                                                              </div>
+    
+    
+    
+    
+                                                                              <div class="col-md-7">
+                                                                                  <input class="form-control required" id="album_p_line" name="album[p_line]" size="30" type="text" formControlName="p_line_text" />
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+    
+                                                                                                          <!-- C-line -->
+                                                                                                          <div class="form-group col-md-6 required">
+                                                                                                              <label>
+                                                                                                                  Copyright&nbsp;
+                                                                                                                  <span class="help-small " ><small> (YYYY Copyright)</small></span>
+                                                                                                              </label>
+    
+                                                                                                              <div class="row">
+                                                                                                                  <div class="col-md-5">
+                                                                                                                      <select class="form-control selectpicker" id="date_c_line_year" formControlName="c_line_yyyy"  >
+                                                                                  <option value="2019">2019</option>
+                                                                                  <option selected="selected" value="2018">2018</option>
+                                                                                  <option value="2017">2017</option>
+                                                                                  <option value="2016">2016</option>
+                                                                                  <option value="2015">2015</option>
+                                                                                  <option value="2014">2014</option>
+                                                                                  <option value="2013">2013</option>
+                                                                                  <option value="2012">2012</option>
+                                                                                  <option value="2011">2011</option>
+                                                                                  <option value="2010">2010</option>
+                                                                                  <option value="2009">2009</option>
+                                                                                  <option value="2008">2008</option>
+                                                                                  <option value="2007">2007</option>
+                                                                                  <option value="2006">2006</option>
+                                                                                  <option value="2005">2005</option>
+                                                                                  <option value="2004">2004</option>
+                                                                                  <option value="2003">2003</option>
+                                                                                  <option value="2002">2002</option>
+                                                                                  <option value="2001">2001</option>
+                                                                                  <option value="2000">2000</option>
+                                                                                  <option value="1999">1999</option>
+                                                                                  <option value="1998">1998</option>
+                                                                                  <option value="1997">1997</option>
+                                                                                  <option value="1996">1996</option>
+                                                                                  <option value="1995">1995</option>
+                                                                                  <option value="1994">1994</option>
+                                                                                  <option value="1993">1993</option>
+                                                                                  <option value="1992">1992</option>
+                                                                                  <option value="1991">1991</option>
+                                                                                  <option value="1990">1990</option>
+                                                                                  <option value="1989">1989</option>
+                                                                                  <option value="1988">1988</option>
+                                                                                  <option value="1987">1987</option>
+                                                                                  <option value="1986">1986</option>
+                                                                                  <option value="1985">1985</option>
+                                                                                  <option value="1984">1984</option>
+                                                                                  <option value="1983">1983</option>
+                                                                                  <option value="1982">1982</option>
+                                                                                  <option value="1981">1981</option>
+                                                                                  <option value="1980">1980</option>
+                                                                                  <option value="1979">1979</option>
+                                                                                  <option value="1978">1978</option>
+                                                                                  <option value="1977">1977</option>
+                                                                                  <option value="1976">1976</option>
+                                                                                  <option value="1975">1975</option>
+                                                                                  <option value="1974">1974</option>
+                                                                                  <option value="1973">1973</option>
+                                                                                  <option value="1972">1972</option>
+                                                                                  <option value="1971">1971</option>
+                                                                                  <option value="1970">1970</option>
+                                                                                  <option value="1969">1969</option>
+                                                                                  <option value="1968">1968</option>
+                                                                                  <option value="1967">1967</option>
+                                                                                  <option value="1966">1966</option>
+                                                                                  <option value="1965">1965</option>
+                                                                                  <option value="1964">1964</option>
+                                                                                  <option value="1963">1963</option>
+                                                                                  <option value="1962">1962</option>
+                                                                                  <option value="1961">1961</option>
+                                                                                  <option value="1960">1960</option>
+                                                                                  <option value="1959">1959</option>
+                                                                                  <option value="1958">1958</option>
+                                                                                  <option value="1957">1957</option>
+                                                                                  <option value="1956">1956</option>
+                                                                                  <option value="1955">1955</option>
+                                                                                  <option value="1954">1954</option>
+                                                                                  <option value="1953">1953</option>
+                                                                                  <option value="1952">1952</option>
+                                                                                  <option value="1951">1951</option>
+                                                                                  <option value="1950">1950</option>
+                                                                                  <option value="1949">1949</option>
+                                                                                  <option value="1948">1948</option>
+                                                                                  <option value="1947">1947</option>
+                                                                                  <option value="1946">1946</option>
+                                                                                  <option value="1945">1945</option>
+                                                                                  <option value="1944">1944</option>
+                                                                                  <option value="1943">1943</option>
+                                                                                  <option value="1942">1942</option>
+                                                                                  <option value="1941">1941</option>
+                                                                                  <option value="1940">1940</option>
+                                                                                  <option value="1939">1939</option>
+                                                                                  <option value="1938">1938</option>
+                                                                                  <option value="1937">1937</option>
+                                                                                  <option value="1936">1936</option>
+                                                                                  <option value="1935">1935</option>
+                                                                                  <option value="1934">1934</option>
+                                                                                  <option value="1933">1933</option>
+                                                                                  <option value="1932">1932</option>
+                                                                                  <option value="1931">1931</option>
+                                                                                  <option value="1930">1930</option>
+                                                                                  <option value="1929">1929</option>
+                                                                                  <option value="1928">1928</option>
+                                                                                  <option value="1927">1927</option>
+                                                                                  <option value="1926">1926</option>
+                                                                                  <option value="1925">1925</option>
+                                                                                  <option value="1924">1924</option>
+                                                                                  <option value="1923">1923</option>
+                                                                                  <option value="1922">1922</option>
+                                                                                  <option value="1921">1921</option>
+                                                                                  <option value="1920">1920</option>
+                                                                                  </select>
+    
+                                                                                                                  </div>
+    
+                                                                                                                  <div class="col-md-7">
+                                                                                                                      <input class="form-control required" id="album_c_line" name="album[c_line]" size="30" type="text" formControlName="c_line_text"  />
+                                                                                                                  </div>
+                                                                                                              </div>
+                                                                                                          </div>
+                                                                                  </div>
+    
+     <div class="row alert alert-danger"
+      [hidden]="crearAlbumForm.controls.p_line_yyyy.valid || crearAlbumForm.controls.p_line_yyyy.pristine ||
+    crearAlbumForm.controls.p_line_text.valid || crearAlbumForm.controls.p_line_text.pristine"
+        class="alert alert-danger">
+                                        Invalid p_line <br>
+    
+                                        </div>
+    
+    
+    
+                                                                <!-- Explicit -->
+    
+                                                                       <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                            <div class="checkbox checkbox-small">
+                                                                                                <label><input formControlName="explicit" type="hidden" value="0" /><input id="album_explicit" formControlName="explicit" type="checkbox" value="1" /> Explicit Material</label>
+                                                                                            </div>
+                                                                           </div>
+                                                                           </div>
+    
+    
+                                  <!-- UPC Code   Language   secondary_language -->
+    
+    
+                                        <div class="row">
+    
+                                                          <div class="form-group col-md-4"  [hidden]="true">
+                                                              <label for="album_upc">UPC Code
+                                                               <span class="help-small " ><small> If available, or request one from DashGo</small></span></label>
+                                                              <input class="form-control" id="album_upc" name="album[upc]" size="30" type="text"formControlName="upc"  />
+                                                          </div>
+    
+                                                          <div class="form-group col-md-4">
+                                                              <label for="album_language">Idioma</label>
+                                                              <select class="form-control selectpicker" data-live-search="true" id="album_language" formControlName="language"><option value="Afrikaans">Afrikaans</option><option value="Arabic">Arabic</option><option value="Bulgarian">Bulgarian</option><option value="Cantonese">Cantonese</option><option value="Catalan">Catalan</option><option value="Chinese">Chinese</option><option value="Croatian">Croatian</option><option value="Czech">Czech</option><option value="Danish">Danish</option><option value="Dutch">Dutch</option><option value="English" selected="selected">English</option><option value="Estonian">Estonian</option><option value="Finnish">Finnish</option><option value="French">French</option><option value="German">German</option><option value="Greek">Greek</option><option value="Hebrew">Hebrew</option><option value="Hindi">Hindi</option><option value="Hungarian">Hungarian</option><option value="Icelandic">Icelandic</option><option value="Indonesian">Indonesian</option><option value="Italian">Italian</option><option value="Japanese">Japanese</option><option value="Kazakh">Kazakh</option><option value="Korean">Korean</option><option value="Lao">Lao</option><option value="Latvian">Latvian</option><option value="Lithuanian">Lithuanian</option><option value="Malay">Malay</option><option value="None">None</option><option value="Norwegian">Norwegian</option><option value="Polish">Polish</option><option value="Portuguese">Portuguese</option><option value="Romanian">Romanian</option><option value="Russian">Russian</option><option value="Slovak">Slovak</option><option value="Slovenian">Slovenian</option><option value="Spanish">Spanish</option><option value="Swedish">Swedish</option><option value="Tagalog">Tagalog</option><option value="Tamil">Tamil</option><option value="Telugu">Telugu</option><option value="Thai">Thai</option><option value="Turkish">Turkish</option><option value="Ukrainian">Ukrainian</option><option value="Urdu">Urdu</option><option value="Vietnamese">Vietnamese</option><option value="Zulu">Zulu</option></select>
+                                                          </div>
+    
+                                                           <div class="form-group col-md-4">
+                                                              <label for="album_language">Idioma Secundario</label>
+                                                              <select class="form-control selectpicker" data-live-search="true" id="album_language" formControlName="secondary_language"><option value="Afrikaans">Afrikaans</option><option value="Arabic">Arabic</option><option value="Bulgarian">Bulgarian</option><option value="Cantonese">Cantonese</option><option value="Catalan">Catalan</option><option value="Chinese">Chinese</option><option value="Croatian">Croatian</option><option value="Czech">Czech</option><option value="Danish">Danish</option><option value="Dutch">Dutch</option><option value="English" selected="selected">English</option><option value="Estonian">Estonian</option><option value="Finnish">Finnish</option><option value="French">French</option><option value="German">German</option><option value="Greek">Greek</option><option value="Hebrew">Hebrew</option><option value="Hindi">Hindi</option><option value="Hungarian">Hungarian</option><option value="Icelandic">Icelandic</option><option value="Indonesian">Indonesian</option><option value="Italian">Italian</option><option value="Japanese">Japanese</option><option value="Kazakh">Kazakh</option><option value="Korean">Korean</option><option value="Lao">Lao</option><option value="Latvian">Latvian</option><option value="Lithuanian">Lithuanian</option><option value="Malay">Malay</option><option value="None">None</option><option value="Norwegian">Norwegian</option><option value="Polish">Polish</option><option value="Portuguese">Portuguese</option><option value="Romanian">Romanian</option><option value="Russian">Russian</option><option value="Slovak">Slovak</option><option value="Slovenian">Slovenian</option><option value="Spanish">Spanish</option><option value="Swedish">Swedish</option><option value="Tagalog">Tagalog</option><option value="Tamil">Tamil</option><option value="Telugu">Telugu</option><option value="Thai">Thai</option><option value="Turkish">Turkish</option><option value="Ukrainian">Ukrainian</option><option value="Urdu">Urdu</option><option value="Vietnamese">Vietnamese</option><option value="Zulu">Zulu</option></select>
+                                                          </div>
+                                             </div>
+    
+    
+                                                           <div class="form-group col-md-12">
+                                                            <label for="album_genre">Género Primario</label>
+                                                            <select  formControlName="genre" class="form-control selectpicker" data-live-search="true" id="album_genre" name="album[genre]"><option value="">- Select One -</option><option value="alt">ALTERNATIVE</option><option value="alt_indie">ALTERNATIVE / INDIE ROCK</option><option value="alt_hard">ALTERNATIVE / PUNK</option><option value="alt_dance">ALTERNATIVE ROCK / ALTERNATIVE DANCE</option><option value="alt_brit">ALTERNATIVE ROCK / BRITISH ALTERNATIVE</option><option value="alt_exp">ALTERNATIVE ROCK / EXPERIMENTAL ROCK</option><option value="alt_garage">ALTERNATIVE ROCK / GARAGE ROCK</option><option value="alt_goth">ALTERNATIVE ROCK / GOTH & INDUSTRIAL</option><option value="alt_grunge">ALTERNATIVE ROCK / GRUNGE</option><option value="alt_new">ALTERNATIVE ROCK / NEW WAVE & POST-PUNK</option><option value="alt_noise">ALTERNATIVE ROCK / NOISE</option><option value="alt_singer">ALTERNATIVE ROCK / SINGER-SONGWRITERS</option><option value="alt_ska">ALTERNATIVE ROCK / SKA</option><option value="alt_space">ALTERNATIVE ROCK / SPACE ROCK</option><option value="sndtrck_anime">ANIME</option><option value="inter_mideast">ARABIC</option><option value="blues">BLUES</option><option value="blues_accoustic">BLUES / ACOUSTIC BLUES</option><option value="blues_chicago">BLUES / CHICAGO BLUES</option><option value="blues_classical">BLUES / CLASSICAL FEMALE VOCAL BLUES</option><option value="blues_cont">BLUES / CONTEMPORARY BLUES</option><option value="blues_delta">BLUES / DELTA BLUES</option><option value="blues_elec">BLUES / ELECTRIC BLUES GUITAR</option><option value="blues_mod">BLUES / MODERN BLUES</option><option value="blues_reg">BLUES / REGIONAL BLUES</option><option value="blues_trad">BLUES / TRADITIONAL BLUES</option><option value="jazz_brazil">BRAZILIAN</option><option value="bway">BROADWAY & VOCALISTS</option><option value="bway_cab">BROADWAY & VOCALISTS / CABARET</option><option value="bway_class">BROADWAY & VOCALISTS / CLASSIC VOCALISTS</option><option value="bway_musical">BROADWAY & VOCALISTS / MUSICALS</option><option value="bway_trad">BROADWAY & VOCALISTS / TRADITIONAL VOCAL POP</option><option value="childs">CHILDREN'S MUSIC</option><option value="child_disneys">CHILDREN'S MUSIC/DISNEY</option><option value="child">CHILDRENS MUSIC</option><option value="child_barney">CHILDRENS MUSIC / BARNEY</option><option value="child_cartoon">CHILDRENS MUSIC / CARTOON MUSIC</option><option value="child_disney">CHILDRENS MUSIC / DISNEY</option><option value="child_edu">CHILDRENS MUSIC / EDUCATIONAL</option><option value="child_lull">CHILDRENS MUSIC / LULLABIES</option><option value="child_music">CHILDRENS MUSIC / MUSIC FOR LITTLE PEOPLE</option><option value="child_pokemon">CHILDRENS MUSIC / POKEMON</option><option value="child_sesame">CHILDRENS MUSIC / SESAME STREET</option><option value="inter_asia">CHINESE</option><option value="gospel">CHRISTIAN & GOSPEL</option><option value="gospel_cont">CHRISTIAN & GOSPEL / CHRISTIAN CONTEMPORARY MUSIC</option><option value="gospel_praise">CHRISTIAN & GOSPEL / PRAISE & WORSHIP</option><option value="classrock">CLASSIC ROCK</option><option value="classrock_aor">CLASSIC ROCK / ALBUM-ORIENTED ROCK (AOR)</option><option value="classrock_arena">CLASSIC ROCK / ARENA ROCK</option><option value="classrock_brit">CLASSIC ROCK / BRITISH INVASION</option><option value="classrock_glam">CLASSIC ROCK / GLAM</option><option value="classrock_psych">CLASSIC ROCK / PSYCHEDELIC ROCK</option><option value="classrock_south">CLASSIC ROCK / SOUTHERN ROCK</option><option value="classrock_super">CLASSIC ROCK / SUPERGROUPS</option><option value="class">CLASSICAL</option><option value="class_baroque">CLASSICAL / BAROQUE (C. 1600-1750)</option><option value="class_chamber">CLASSICAL / CHAMBER MUSIC</option><option value="class_class">CLASSICAL / CLASSICAL (C. 1770-1830)</option><option value="class_crossover">CLASSICAL / CLASSICAL CROSSOVER</option><option value="class_early">CLASSICAL / EARLY MUSIC</option><option value="class_modern">CLASSICAL / MODERN, 20TH, & 21ST CENTURY</option><option value="opera_operet">CLASSICAL / OPERA</option><option value="class_rena">CLASSICAL / RENAISSANCE (C. 1450-1600)</option><option value="class_romantic">CLASSICAL / ROMANTIC (C. 1820-1910)</option><option value="class_sacred">CLASSICAL / SACRED & RELIGIOUS</option><option value="class_symph">CLASSICAL / SYMPHONIES</option><option value="misc_comedy">COMEDY</option><option value="country">COUNTRY</option><option value="country_alt">COUNTRY / ALT-COUNTRY & AMERICANA</option><option value="country_gospel">COUNTRY / COUNTRY GOSPEL</option><option value="country_cowboy">COUNTRY / COWBOY</option><option value="country_honky">COUNTRY / HONKY-TONK</option><option value="country_outlaw">COUNTRY / OUTLAW & PROGRESSIVE COUNTRY</option><option value="country_trad">COUNTRY / TRADITIONAL COUNTRY</option><option value="country_west">COUNTRY / WESTERN SWING</option><option value="dance">DANCE</option><option value="dance_amb">DANCE & DJ / AMBIENT</option><option value="dance_big">DANCE & DJ / BIG BEAT</option><option value="dance_pop">DANCE & DJ / DANCE POP</option><option value="dance_disco">DANCE & DJ / DISCO</option><option value="dance_drum">DANCE & DJ / DRUM & BASS</option><option value="dance_free">DANCE & DJ / FREESTYLE</option><option value="dance_house">DANCE & DJ / HOUSE</option><option value="dance_idm">DANCE & DJ / IDM</option><option value="dance_tran">DANCE & DJ / TRANCE</option><option value="dance_trip">DANCE & DJ / TRIP-HOP</option><option value="dance_turn">DANCE & DJ / TURNTABLISTS</option><option value="pop_easy">EASY LISTENING</option><option value="lounge">EASY LISTENING / LOUNGE</option><option value="dance_elec">ELECTRONIC</option><option value="misc_exer">FITNESS & WORKOUT</option><option value="folk">FOLK</option><option value="folk_cont">FOLK / CONTEMPORARY FOLK</option><option value="folk_jewish">FOLK / JEWISH & YIDDISH MUSIC</option><option value="folk_brit">FOLK / TRADITIONAL BRITISH & CELTIC FOLK</option><option value="folk_trad">FOLK / TRADITIONAL FOLK</option><option value="pop_euro">FRENCH POP</option><option value="inter_euro">GERMAN POP</option><option value="hard">HARD ROCK & METAL</option><option value="hard_alt">HARD ROCK & METAL / ALTERNATIVE METAL</option><option value="hard_brit">HARD ROCK & METAL / BRITISH METAL</option><option value="hard_death">HARD ROCK & METAL / DEATH METAL</option><option value="hard_hard">HARD ROCK & METAL / HARD ROCK</option><option value="hard_pop">HARD ROCK & METAL / POP METAL</option><option value="hard_thrash">HARD ROCK & METAL / THRASH & SPEED METAL</option><option value="rap">HIP HOP/RAP</option><option value="misc_holi">HOLIDAY</option><option value="gospel_alt">HOLIDAY / CHANUKAH</option><option value="gospel_country">HOLIDAY / CHRISTMAS</option><option value="gospel_rap">HOLIDAY / EASTER</option><option value="gospel_rock">HOLIDAY / HALLOWEEN</option><option value="gospel_gospel">HOLIDAY / THANKSGIVING</option><option value="inter_india">INDIAN</option><option value="inter_mexi">INDIAN / TELUGU</option><option value="misc_instr">INSPIRATIONAL</option><option value="dance_tech">INSTRUMENTAL</option><option value="inter">INTERNATIONAL</option><option value="inter_afri">INTERNATIONAL / AFRICA</option><option value="inter_aust">INTERNATIONAL / AUSTRALIA & NEW ZEALAND</option><option value="inter_cajun">INTERNATIONAL / CAJUN & ZYDECO</option><option value="inter_carib">INTERNATIONAL / CARIBBEAN & CUBA</option><option value="inter_celt">INTERNATIONAL / CELTIC</option><option value="inter_latin">INTERNATIONAL / LATIN MUSIC</option><option value="inter_noramer">INTERNATIONAL / NORTH AMERICA</option><option value="inter_pacific">INTERNATIONAL / PACIFIC ISLANDS</option><option value="inter_souamer">INTERNATIONAL / SOUTH & CENTRAL AMERICA</option><option value="pop_cont">J-POP</option><option value="jazz">JAZZ</option><option value="jazz_acid">JAZZ / ACID JAZZ</option><option value="jazz_avant">JAZZ / AVANT GARDE & FREE JAZZ</option><option value="jazz_bebop">JAZZ / BEBOP</option><option value="jazz_cool">JAZZ / COOL JAZZ</option><option value="jazz_fus">JAZZ / JAZZ FUSION</option><option value="jazz_latin">JAZZ / LATIN JAZZ</option><option value="jazz_mod">JAZZ / MODERN POSTBEBOP</option><option value="jazz_orleans">JAZZ / NEW ORLEANS JAZZ</option><option value="jazz_smooth">JAZZ / SMOOTH JAZZ</option><option value="jazz_soul">JAZZ / SOUL-JAZZ & BOOGALOO</option><option value="jazz_swing">JAZZ / SWING JAZZ</option><option value="jazz_trad">JAZZ / TRADITIONAL JAZZ & RAGTIME</option><option value="pop_rock">K-POP</option><option value="misc_kara">KARAOKE</option><option value="latin">LATIN</option><option value="latin_salsa">LATIN / REGIONAL MEXICANO</option><option value="latin_bach">LATIN MUSIC / BACHATA</option><option value="latin_band">LATIN MUSIC / BANDA</option><option value="latin_big">LATIN MUSIC / BIG BAND</option><option value="latin_bole">LATIN MUSIC / BOLERO</option><option value="latin_corr">LATIN MUSIC / CORRIDOS</option><option value="latin_dura">LATIN MUSIC / DURANGUENCE</option><option value="latin_flam">LATIN MUSIC / FLAMENCO</option><option value="latin_grup">LATIN MUSIC / GRUPERO</option><option value="latin_pop">LATIN MUSIC / LATIN POP</option><option value="latin_rap">LATIN MUSIC / LATIN RAP</option><option value="latin_mamb">LATIN MUSIC / MAMBO</option><option value="latin_mari">LATIN MUSIC / MARIACHI</option><option value="latin_mere">LATIN MUSIC / MERENGUE</option><option value="latin_nort">LATIN MUSIC / NORTENO</option><option value="latin_ranch">LATIN MUSIC / RANCHERA</option><option value="latin_rock">LATIN MUSIC / ROCK EN ESPANOL</option><option value="latin_sonid">LATIN MUSIC / SONIDERO</option><option value="latin_tango">LATIN MUSIC / TANGO</option><option value="latin_teja">LATIN MUSIC / TEJANO</option><option value="latin_ranchs">LATIN MUSIC/RANCHERA</option><option value="jazz_jam">MARCHING BANDS</option><option value="misc">MISCELLANEOUS</option><option value="misc_anim">MISCELLANEOUS / ANIMAL SOUNDS</option><option value="misc_exp">MISCELLANEOUS / EXPERIMENTAL MUSIC</option><option value="misc_gay">MISCELLANEOUS / GAY & LESBIAN</option><option value="misc_march">MISCELLANEOUS / MARCHES</option><option value="misc_nost">MISCELLANEOUS / NOSTALGIA</option><option value="misc_poet">MISCELLANEOUS / POETRY, SPOKEN WORD & INTERVIEWS</option><option value="misc_polka">MISCELLANEOUS / POLKA</option><option value="misc_self">MISCELLANEOUS / SELF-HELP</option><option value="misc_test">MISCELLANEOUS / TEST RECORDING</option><option value="misc_wedd">MISCELLANEOUS / WEDDING MUSIC</option><option value="newage">NEW AGE</option><option value="newage_env">NEW AGE / ENVIRONMENTAL</option><option value="newage_heal">NEW AGE / HEALING</option><option value="newage_medit">NEW AGE / MEDITATION</option><option value="opera">OPERA</option><option value="opera_arias">OPERA & VOCAL / ARIAS</option><option value="opera_baroq">OPERA & VOCAL / BAROQUE (C. 1600-1750)</option><option value="opera_class">OPERA & VOCAL / CLASSICAL (C. 1770-1830)</option><option value="opera_early">OPERA & VOCAL / EARLY MUSIC</option><option value="opera_mod">OPERA & VOCAL / MODERN & 20TH CENTURY</option><option value="opera_orat">OPERA & VOCAL / ORATORIOS</option><option value="opera_rena">OPERA & VOCAL / RENAISSANCE (C. 1450-1600)</option><option value="opera_romantic">OPERA & VOCAL / ROMANTIC (C. 1820-1910)</option><option value="opera_vocal">ORCHESTRAL</option><option value="pop">POP</option><option value="pop_adult">POP / ADULT ALTERNATIVE</option><option value="pop_oldies">POP / OLDIES</option><option value="pop_singer">POP / SINGER-SONGWRITERS</option><option value="pop_soft">POP / SOFT ROCK</option><option value="pop_teen">POP / TEEN POP</option><option value="randb">R&B</option><option value="randb_class">R&B / CLASSIC R&B</option><option value="randb_cont">R&B / CONTEMPORARY R&B</option><option value="randb_funk">R&B / FUNK</option><option value="randb_mo">R&B / MOTOWN</option><option value="randb_neo">R&B / NEO-SOUL</option><option value="randb_newjack">R&B / NEW JACK</option><option value="randb_qs">R&B / QUIET STORM</option><option value="randb_soul">R&B/SOUL</option><option value="rap_bass">RAP & HIP-HOP / BASS</option><option value="rap_east">RAP & HIP-HOP / EAST COAST</option><option value="rap_exp">RAP & HIP-HOP / EXPERIMENTAL RAP</option><option value="rap_gang">RAP & HIP-HOP / GANGSTA & HARDCORE</option><option value="rap_int">RAP & HIP-HOP / INTERNATIONAL RAP</option><option value="rap_old">RAP & HIP-HOP / OLD SCHOOL</option><option value="rap_pop">RAP & HIP-HOP / POP RAP</option><option value="rap_south">RAP & HIP-HOP / SOUTHERN RAP</option><option value="rap_west">RAP & HIP-HOP / WEST COAST</option><option value="inter_reggae">REGGAE</option><option value="rock">ROCK</option><option value="rock_blues">ROCK / BLUES ROCK</option><option value="rock_country">ROCK / COUNTRY ROCK</option><option value="rock_folk">ROCK / FOLK ROCK</option><option value="rock_funk">ROCK / FUNK ROCK</option><option value="rock_jam">ROCK / JAM BANDS</option><option value="rock_oldies">ROCK / OLDIES & RETRO</option><option value="rock_power">ROCK / POWER POP</option><option value="rock_prog">ROCK / PROGRESSIVE</option><option value="rock_rap">ROCK / RAP ROCK</option><option value="rock_roots">ROCK / ROOTS ROCK</option><option value="rock_singer">ROCK / SINGER-SONGWRITER</option><option value="singer_song">SINGER/SONGWRITER</option><option value="sndtrck">SOUNDTRACK</option><option value="misc_sound">SOUNDTRACK / SOUND EFFECTS</option><option value="sndtrck_score">SOUNDTRACKS / MOVIE SCORES</option><option value="sndtrck_movie">SOUNDTRACKS / MOVIE SOUNDTRACKS</option><option value="sndtrck_tv">SOUNDTRACKS / TELEVISION SOUNDTRACKS</option><option value="spoken_radio">SPOKEN WORD</option><option value="jazz_vocal">VOCAL</option><option value="dance_world">WORLD</option><option value="world_asia">WORLD / ASIA</option><option value="newage_celt">WORLD / CELTIC</option><option value="dance_indust">WORLD / FRANCE</option><option value="world_hawaii">WORLD / HAWAII</option></select>
+                                                        </div>
+    
+                                                        <div class="form-group col-md-12">
+                                                            <label for="album_alt_genres">Género Secundario<span class="help-small " ><small> (mantené ctrl para seleccionar más de uno)</small></span></label>
+                                                            <select formControlName="album_genres"  class="form-control selectpicker" data-live-search="true" id="alt_genre" multiple="multiple" name="alt_genres[]"><option value="alt">ALTERNATIVE</option><option value="alt_indie">ALTERNATIVE / INDIE ROCK</option><option value="alt_hard">ALTERNATIVE / PUNK</option><option value="alt_dance">ALTERNATIVE ROCK / ALTERNATIVE DANCE</option><option value="alt_brit">ALTERNATIVE ROCK / BRITISH ALTERNATIVE</option><option value="alt_exp">ALTERNATIVE ROCK / EXPERIMENTAL ROCK</option><option value="alt_garage">ALTERNATIVE ROCK / GARAGE ROCK</option><option value="alt_goth">ALTERNATIVE ROCK / GOTH & INDUSTRIAL</option><option value="alt_grunge">ALTERNATIVE ROCK / GRUNGE</option><option value="alt_new">ALTERNATIVE ROCK / NEW WAVE & POST-PUNK</option><option value="alt_noise">ALTERNATIVE ROCK / NOISE</option><option value="alt_singer">ALTERNATIVE ROCK / SINGER-SONGWRITERS</option><option value="alt_ska">ALTERNATIVE ROCK / SKA</option><option value="alt_space">ALTERNATIVE ROCK / SPACE ROCK</option><option value="sndtrck_anime">ANIME</option><option value="inter_mideast">ARABIC</option><option value="blues">BLUES</option><option value="blues_accoustic">BLUES / ACOUSTIC BLUES</option><option value="blues_chicago">BLUES / CHICAGO BLUES</option><option value="blues_classical">BLUES / CLASSICAL FEMALE VOCAL BLUES</option><option value="blues_cont">BLUES / CONTEMPORARY BLUES</option><option value="blues_delta">BLUES / DELTA BLUES</option><option value="blues_elec">BLUES / ELECTRIC BLUES GUITAR</option><option value="blues_mod">BLUES / MODERN BLUES</option><option value="blues_reg">BLUES / REGIONAL BLUES</option><option value="blues_trad">BLUES / TRADITIONAL BLUES</option><option value="jazz_brazil">BRAZILIAN</option><option value="bway">BROADWAY & VOCALISTS</option><option value="bway_cab">BROADWAY & VOCALISTS / CABARET</option><option value="bway_class">BROADWAY & VOCALISTS / CLASSIC VOCALISTS</option><option value="bway_musical">BROADWAY & VOCALISTS / MUSICALS</option><option value="bway_trad">BROADWAY & VOCALISTS / TRADITIONAL VOCAL POP</option><option value="childs">CHILDREN'S MUSIC</option><option value="child_disneys">CHILDREN'S MUSIC/DISNEY</option><option value="child">CHILDRENS MUSIC</option><option value="child_barney">CHILDRENS MUSIC / BARNEY</option><option value="child_cartoon">CHILDRENS MUSIC / CARTOON MUSIC</option><option value="child_disney">CHILDRENS MUSIC / DISNEY</option><option value="child_edu">CHILDRENS MUSIC / EDUCATIONAL</option><option value="child_lull">CHILDRENS MUSIC / LULLABIES</option><option value="child_music">CHILDRENS MUSIC / MUSIC FOR LITTLE PEOPLE</option><option value="child_pokemon">CHILDRENS MUSIC / POKEMON</option><option value="child_sesame">CHILDRENS MUSIC / SESAME STREET</option><option value="inter_asia">CHINESE</option><option value="gospel">CHRISTIAN & GOSPEL</option><option value="gospel_cont">CHRISTIAN & GOSPEL / CHRISTIAN CONTEMPORARY MUSIC</option><option value="gospel_praise">CHRISTIAN & GOSPEL / PRAISE & WORSHIP</option><option value="classrock">CLASSIC ROCK</option><option value="classrock_aor">CLASSIC ROCK / ALBUM-ORIENTED ROCK (AOR)</option><option value="classrock_arena">CLASSIC ROCK / ARENA ROCK</option><option value="classrock_brit">CLASSIC ROCK / BRITISH INVASION</option><option value="classrock_glam">CLASSIC ROCK / GLAM</option><option value="classrock_psych">CLASSIC ROCK / PSYCHEDELIC ROCK</option><option value="classrock_south">CLASSIC ROCK / SOUTHERN ROCK</option><option value="classrock_super">CLASSIC ROCK / SUPERGROUPS</option><option value="class">CLASSICAL</option><option value="class_baroque">CLASSICAL / BAROQUE (C. 1600-1750)</option><option value="class_chamber">CLASSICAL / CHAMBER MUSIC</option><option value="class_class">CLASSICAL / CLASSICAL (C. 1770-1830)</option><option value="class_crossover">CLASSICAL / CLASSICAL CROSSOVER</option><option value="class_early">CLASSICAL / EARLY MUSIC</option><option value="class_modern">CLASSICAL / MODERN, 20TH, & 21ST CENTURY</option><option value="opera_operet">CLASSICAL / OPERA</option><option value="class_rena">CLASSICAL / RENAISSANCE (C. 1450-1600)</option><option value="class_romantic">CLASSICAL / ROMANTIC (C. 1820-1910)</option><option value="class_sacred">CLASSICAL / SACRED & RELIGIOUS</option><option value="class_symph">CLASSICAL / SYMPHONIES</option><option value="misc_comedy">COMEDY</option><option value="country">COUNTRY</option><option value="country_alt">COUNTRY / ALT-COUNTRY & AMERICANA</option><option value="country_gospel">COUNTRY / COUNTRY GOSPEL</option><option value="country_cowboy">COUNTRY / COWBOY</option><option value="country_honky">COUNTRY / HONKY-TONK</option><option value="country_outlaw">COUNTRY / OUTLAW & PROGRESSIVE COUNTRY</option><option value="country_trad">COUNTRY / TRADITIONAL COUNTRY</option><option value="country_west">COUNTRY / WESTERN SWING</option><option value="dance">DANCE</option><option value="dance_amb">DANCE & DJ / AMBIENT</option><option value="dance_big">DANCE & DJ / BIG BEAT</option><option value="dance_pop">DANCE & DJ / DANCE POP</option><option value="dance_disco">DANCE & DJ / DISCO</option><option value="dance_drum">DANCE & DJ / DRUM & BASS</option><option value="dance_free">DANCE & DJ / FREESTYLE</option><option value="dance_house">DANCE & DJ / HOUSE</option><option value="dance_idm">DANCE & DJ / IDM</option><option value="dance_tran">DANCE & DJ / TRANCE</option><option value="dance_trip">DANCE & DJ / TRIP-HOP</option><option value="dance_turn">DANCE & DJ / TURNTABLISTS</option><option value="pop_easy">EASY LISTENING</option><option value="lounge">EASY LISTENING / LOUNGE</option><option value="dance_elec">ELECTRONIC</option><option value="misc_exer">FITNESS & WORKOUT</option><option value="folk">FOLK</option><option value="folk_cont">FOLK / CONTEMPORARY FOLK</option><option value="folk_jewish">FOLK / JEWISH & YIDDISH MUSIC</option><option value="folk_brit">FOLK / TRADITIONAL BRITISH & CELTIC FOLK</option><option value="folk_trad">FOLK / TRADITIONAL FOLK</option><option value="pop_euro">FRENCH POP</option><option value="inter_euro">GERMAN POP</option><option value="hard">HARD ROCK & METAL</option><option value="hard_alt">HARD ROCK & METAL / ALTERNATIVE METAL</option><option value="hard_brit">HARD ROCK & METAL / BRITISH METAL</option><option value="hard_death">HARD ROCK & METAL / DEATH METAL</option><option value="hard_hard">HARD ROCK & METAL / HARD ROCK</option><option value="hard_pop">HARD ROCK & METAL / POP METAL</option><option value="hard_thrash">HARD ROCK & METAL / THRASH & SPEED METAL</option><option value="rap">HIP HOP/RAP</option><option value="misc_holi">HOLIDAY</option><option value="gospel_alt">HOLIDAY / CHANUKAH</option><option value="gospel_country">HOLIDAY / CHRISTMAS</option><option value="gospel_rap">HOLIDAY / EASTER</option><option value="gospel_rock">HOLIDAY / HALLOWEEN</option><option value="gospel_gospel">HOLIDAY / THANKSGIVING</option><option value="inter_india">INDIAN</option><option value="inter_mexi">INDIAN / TELUGU</option><option value="misc_instr">INSPIRATIONAL</option><option value="dance_tech">INSTRUMENTAL</option><option value="inter">INTERNATIONAL</option><option value="inter_afri">INTERNATIONAL / AFRICA</option><option value="inter_aust">INTERNATIONAL / AUSTRALIA & NEW ZEALAND</option><option value="inter_cajun">INTERNATIONAL / CAJUN & ZYDECO</option><option value="inter_carib">INTERNATIONAL / CARIBBEAN & CUBA</option><option value="inter_celt">INTERNATIONAL / CELTIC</option><option value="inter_latin">INTERNATIONAL / LATIN MUSIC</option><option value="inter_noramer">INTERNATIONAL / NORTH AMERICA</option><option value="inter_pacific">INTERNATIONAL / PACIFIC ISLANDS</option><option value="inter_souamer">INTERNATIONAL / SOUTH & CENTRAL AMERICA</option><option value="pop_cont">J-POP</option><option value="jazz">JAZZ</option><option value="jazz_acid">JAZZ / ACID JAZZ</option><option value="jazz_avant">JAZZ / AVANT GARDE & FREE JAZZ</option><option value="jazz_bebop">JAZZ / BEBOP</option><option value="jazz_cool">JAZZ / COOL JAZZ</option><option value="jazz_fus">JAZZ / JAZZ FUSION</option><option value="jazz_latin">JAZZ / LATIN JAZZ</option><option value="jazz_mod">JAZZ / MODERN POSTBEBOP</option><option value="jazz_orleans">JAZZ / NEW ORLEANS JAZZ</option><option value="jazz_smooth">JAZZ / SMOOTH JAZZ</option><option value="jazz_soul">JAZZ / SOUL-JAZZ & BOOGALOO</option><option value="jazz_swing">JAZZ / SWING JAZZ</option><option value="jazz_trad">JAZZ / TRADITIONAL JAZZ & RAGTIME</option><option value="pop_rock">K-POP</option><option value="misc_kara">KARAOKE</option><option value="latin">LATIN</option><option value="latin_salsa">LATIN / REGIONAL MEXICANO</option><option value="latin_bach">LATIN MUSIC / BACHATA</option><option value="latin_band">LATIN MUSIC / BANDA</option><option value="latin_big">LATIN MUSIC / BIG BAND</option><option value="latin_bole">LATIN MUSIC / BOLERO</option><option value="latin_corr">LATIN MUSIC / CORRIDOS</option><option value="latin_dura">LATIN MUSIC / DURANGUENCE</option><option value="latin_flam">LATIN MUSIC / FLAMENCO</option><option value="latin_grup">LATIN MUSIC / GRUPERO</option><option value="latin_pop">LATIN MUSIC / LATIN POP</option><option value="latin_rap">LATIN MUSIC / LATIN RAP</option><option value="latin_mamb">LATIN MUSIC / MAMBO</option><option value="latin_mari">LATIN MUSIC / MARIACHI</option><option value="latin_mere">LATIN MUSIC / MERENGUE</option><option value="latin_nort">LATIN MUSIC / NORTENO</option><option value="latin_ranch">LATIN MUSIC / RANCHERA</option><option value="latin_rock">LATIN MUSIC / ROCK EN ESPANOL</option><option value="latin_sonid">LATIN MUSIC / SONIDERO</option><option value="latin_tango">LATIN MUSIC / TANGO</option><option value="latin_teja">LATIN MUSIC / TEJANO</option><option value="latin_ranchs">LATIN MUSIC/RANCHERA</option><option value="jazz_jam">MARCHING BANDS</option><option value="misc">MISCELLANEOUS</option><option value="misc_anim">MISCELLANEOUS / ANIMAL SOUNDS</option><option value="misc_exp">MISCELLANEOUS / EXPERIMENTAL MUSIC</option><option value="misc_gay">MISCELLANEOUS / GAY & LESBIAN</option><option value="misc_march">MISCELLANEOUS / MARCHES</option><option value="misc_nost">MISCELLANEOUS / NOSTALGIA</option><option value="misc_poet">MISCELLANEOUS / POETRY, SPOKEN WORD & INTERVIEWS</option><option value="misc_polka">MISCELLANEOUS / POLKA</option><option value="misc_self">MISCELLANEOUS / SELF-HELP</option><option value="misc_test">MISCELLANEOUS / TEST RECORDING</option><option value="misc_wedd">MISCELLANEOUS / WEDDING MUSIC</option><option value="newage">NEW AGE</option><option value="newage_env">NEW AGE / ENVIRONMENTAL</option><option value="newage_heal">NEW AGE / HEALING</option><option value="newage_medit">NEW AGE / MEDITATION</option><option value="opera">OPERA</option><option value="opera_arias">OPERA & VOCAL / ARIAS</option><option value="opera_baroq">OPERA & VOCAL / BAROQUE (C. 1600-1750)</option><option value="opera_class">OPERA & VOCAL / CLASSICAL (C. 1770-1830)</option><option value="opera_early">OPERA & VOCAL / EARLY MUSIC</option><option value="opera_mod">OPERA & VOCAL / MODERN & 20TH CENTURY</option><option value="opera_orat">OPERA & VOCAL / ORATORIOS</option><option value="opera_rena">OPERA & VOCAL / RENAISSANCE (C. 1450-1600)</option><option value="opera_romantic">OPERA & VOCAL / ROMANTIC (C. 1820-1910)</option><option value="opera_vocal">ORCHESTRAL</option><option value="pop">POP</option><option value="pop_adult">POP / ADULT ALTERNATIVE</option><option value="pop_oldies">POP / OLDIES</option><option value="pop_singer">POP / SINGER-SONGWRITERS</option><option value="pop_soft">POP / SOFT ROCK</option><option value="pop_teen">POP / TEEN POP</option><option value="randb">R&B</option><option value="randb_class">R&B / CLASSIC R&B</option><option value="randb_cont">R&B / CONTEMPORARY R&B</option><option value="randb_funk">R&B / FUNK</option><option value="randb_mo">R&B / MOTOWN</option><option value="randb_neo">R&B / NEO-SOUL</option><option value="randb_newjack">R&B / NEW JACK</option><option value="randb_qs">R&B / QUIET STORM</option><option value="randb_soul">R&B/SOUL</option><option value="rap_bass">RAP & HIP-HOP / BASS</option><option value="rap_east">RAP & HIP-HOP / EAST COAST</option><option value="rap_exp">RAP & HIP-HOP / EXPERIMENTAL RAP</option><option value="rap_gang">RAP & HIP-HOP / GANGSTA & HARDCORE</option><option value="rap_int">RAP & HIP-HOP / INTERNATIONAL RAP</option><option value="rap_old">RAP & HIP-HOP / OLD SCHOOL</option><option value="rap_pop">RAP & HIP-HOP / POP RAP</option><option value="rap_south">RAP & HIP-HOP / SOUTHERN RAP</option><option value="rap_west">RAP & HIP-HOP / WEST COAST</option><option value="inter_reggae">REGGAE</option><option value="rock">ROCK</option><option value="rock_blues">ROCK / BLUES ROCK</option><option value="rock_country">ROCK / COUNTRY ROCK</option><option value="rock_folk">ROCK / FOLK ROCK</option><option value="rock_funk">ROCK / FUNK ROCK</option><option value="rock_jam">ROCK / JAM BANDS</option><option value="rock_oldies">ROCK / OLDIES & RETRO</option><option value="rock_power">ROCK / POWER POP</option><option value="rock_prog">ROCK / PROGRESSIVE</option><option value="rock_rap">ROCK / RAP ROCK</option><option value="rock_roots">ROCK / ROOTS ROCK</option><option value="rock_singer">ROCK / SINGER-SONGWRITER</option><option value="singer_song">SINGER/SONGWRITER</option><option value="sndtrck">SOUNDTRACK</option><option value="misc_sound">SOUNDTRACK / SOUND EFFECTS</option><option value="sndtrck_score">SOUNDTRACKS / MOVIE SCORES</option><option value="sndtrck_movie">SOUNDTRACKS / MOVIE SOUNDTRACKS</option><option value="sndtrck_tv">SOUNDTRACKS / TELEVISION SOUNDTRACKS</option><option value="spoken_radio">SPOKEN WORD</option><option value="jazz_vocal">VOCAL</option><option value="dance_world">WORLD</option><option value="world_asia">WORLD / ASIA</option><option value="newage_celt">WORLD / CELTIC</option><option value="dance_indust">WORLD / FRANCE</option><option value="world_hawaii">WORLD / HAWAII</option></select>
+                                                        </div>
+    
+    
+                                <div class="form-group col-md-12">
+                                                            <label for="album_alt_genres">Territorio <span class="help-small " ><small> (mantené ctrl para seleccionar más de uno)</small></span></label>
+                                                            <select formControlName="album_territories"  class="form-control selectpicker" data-live-search="true" id="album_territories" multiple="multiple" name="album_territories[]">
+    
+                                                              <option value="AF">Afghanistan</option>
+                                                                <option value="AX">Åland Islands</option>
+                                                                <option value="AL">Albania</option>
+                                                                <option value="DZ">Algeria</option>
+                                                                <option value="AS">American Samoa</option>
+                                                                <option value="AD">Andorra</option>
+                                                                <option value="AO">Angola</option>
+                                                                <option value="AI">Anguilla</option>
+                                                                <option value="AQ">Antarctica</option>
+                                                                <option value="AG">Antigua and Barbuda</option>
+                                                                <option value="AR">Argentina</option>
+                                                                <option value="AM">Armenia</option>
+                                                                <option value="AW">Aruba</option>
+                                                                <option value="AU">Australia</option>
+                                                                <option value="AT">Austria</option>
+                                                                <option value="AZ">Azerbaijan</option>
+                                                                <option value="BS">Bahamas</option>
+                                                                <option value="BH">Bahrain</option>
+                                                                <option value="BD">Bangladesh</option>
+                                                                <option value="BB">Barbados</option>
+                                                                <option value="BY">Belarus</option>
+                                                                <option value="BE">Belgium</option>
+                                                                <option value="BZ">Belize</option>
+                                                                <option value="BJ">Benin</option>
+                                                                <option value="BM">Bermuda</option>
+                                                                <option value="BT">Bhutan</option>
+                                                                <option value="BO">Bolivia</option>
+                                                                <option value="BA">Bosnia and Herzegovina</option>
+                                                                <option value="BW">Botswana</option>
+                                                                <option value="BV">Bouvet Island</option>
+                                                                <option value="BR">Brazil</option>
+                                                                <option value="IO">British Indian Ocean Territory</option>
+                                                                <option value="BN">Brunei Darussalam</option>
+                                                                <option value="BG">Bulgaria</option>
+                                                                <option value="BF">Burkina Faso</option>
+                                                                <option value="BI">Burundi</option>
+                                                                <option value="KH">Cambodia</option>
+                                                                <option value="CM">Cameroon</option>
+                                                                <option value="CA">Canada</option>
+                                                                <option value="CV">Cape Verde</option>
+                                                                <option value="KY">Cayman Islands</option>
+                                                                <option value="CF">Central African Republic</option>
+                                                                <option value="TD">Chad</option>
+                                                                <option value="CL">Chile</option>
+                                                                <option value="CN">China</option>
+                                                                <option value="CX">Christmas Island</option>
+                                                                <option value="CC">Cocos (Keeling) Islands</option>
+                                                                <option value="CO">Colombia</option>
+                                                                <option value="KM">Comoros</option>
+                                                                <option value="CG">Congo</option>
+                                                                <option value="CD">Congo, The Democratic Republic of The</option>
+                                                                <option value="CK">Cook Islands</option>
+                                                                <option value="CR">Costa Rica</option>
+                                                                <option value="CI">Cote D'ivoire</option>
+                                                                <option value="HR">Croatia</option>
+                                                                <option value="CU">Cuba</option>
+                                                                <option value="CY">Cyprus</option>
+                                                                <option value="CZ">Czechia</option>
+                                                                <option value="DK">Denmark</option>
+                                                                <option value="DJ">Djibouti</option>
+                                                                <option value="DM">Dominica</option>
+                                                                <option value="DO">Dominican Republic</option>
+                                                                <option value="EC">Ecuador</option>
+                                                                <option value="EG">Egypt</option>
+                                                                <option value="SV">El Salvador</option>
+                                                                <option value="GQ">Equatorial Guinea</option>
+                                                                <option value="ER">Eritrea</option>
+                                                                <option value="EE">Estonia</option>
+                                                                <option value="ET">Ethiopia</option>
+                                                                <option value="FK">Falkland Islands (Malvinas)</option>
+                                                                <option value="FO">Faroe Islands</option>
+                                                                <option value="FJ">Fiji</option>
+                                                                <option value="FI">Finland</option>
+                                                                <option value="FR">France</option>
+                                                                <option value="GF">French Guiana</option>
+                                                                <option value="PF">French Polynesia</option>
+                                                                <option value="TF">French Southern Territories</option>
+                                                                <option value="GA">Gabon</option>
+                                                                <option value="GM">Gambia</option>
+                                                                <option value="GE">Georgia</option>
+                                                                <option value="DE">Germany</option>
+                                                                <option value="GH">Ghana</option>
+                                                                <option value="GI">Gibraltar</option>
+                                                                <option value="GR">Greece</option>
+                                                                <option value="GL">Greenland</option>
+                                                                <option value="GD">Grenada</option>
+                                                                <option value="GP">Guadeloupe</option>
+                                                                <option value="GU">Guam</option>
+                                                                <option value="GT">Guatemala</option>
+                                                                <option value="GG">Guernsey</option>
+                                                                <option value="GN">Guinea</option>
+                                                                <option value="GW">Guinea-bissau</option>
+                                                                <option value="GY">Guyana</option>
+                                                                <option value="HT">Haiti</option>
+                                                                <option value="HM">Heard Island and Mcdonald Islands</option>
+                                                                <option value="VA">Holy See (Vatican City State)</option>
+                                                                <option value="HN">Honduras</option>
+                                                                <option value="HK">Hong Kong</option>
+                                                                <option value="HU">Hungary</option>
+                                                                <option value="IS">Iceland</option>
+                                                                <option value="IN">India</option>
+                                                                <option value="ID">Indonesia</option>
+                                                                <option value="IR">Iran, Islamic Republic of</option>
+                                                                <option value="IQ">Iraq</option>
+                                                                <option value="IE">Ireland</option>
+                                                                <option value="IM">Isle of Man</option>
+                                                                <option value="IL">Israel</option>
+                                                                <option value="IT">Italy</option>
+                                                                <option value="JM">Jamaica</option>
+                                                                <option value="JP">Japan</option>
+                                                                <option value="JE">Jersey</option>
+                                                                <option value="JO">Jordan</option>
+                                                                <option value="KZ">Kazakhstan</option>
+                                                                <option value="KE">Kenya</option>
+                                                                <option value="KI">Kiribati</option>
+                                                                <option value="KP">Korea, Democratic People's Republic of</option>
+                                                                <option value="KR">Korea, Republic of</option>
+                                                                <option value="KW">Kuwait</option>
+                                                                <option value="KG">Kyrgyzstan</option>
+                                                                <option value="LA">Lao People's Democratic Republic</option>
+                                                                <option value="LV">Latvia</option>
+                                                                <option value="LB">Lebanon</option>
+                                                                <option value="LS">Lesotho</option>
+                                                                <option value="LR">Liberia</option>
+                                                                <option value="LY">Libyan Arab Jamahiriya</option>
+                                                                <option value="LI">Liechtenstein</option>
+                                                                <option value="LT">Lithuania</option>
+                                                                <option value="LU">Luxembourg</option>
+                                                                <option value="MO">Macao</option>
+                                                                <option value="MK">Macedonia, The Former Yugoslav Republic of</option>
+                                                                <option value="MG">Madagascar</option>
+                                                                <option value="MW">Malawi</option>
+                                                                <option value="MY">Malaysia</option>
+                                                                <option value="MV">Maldives</option>
+                                                                <option value="ML">Mali</option>
+                                                                <option value="MT">Malta</option>
+                                                                <option value="MH">Marshall Islands</option>
+                                                                <option value="MQ">Martinique</option>
+                                                                <option value="MR">Mauritania</option>
+                                                                <option value="MU">Mauritius</option>
+                                                                <option value="YT">Mayotte</option>
+                                                                <option value="MX">Mexico</option>
+                                                                <option value="FM">Micronesia, Federated States of</option>
+                                                                <option value="MD">Moldova, Republic of</option>
+                                                                <option value="MC">Monaco</option>
+                                                                <option value="MN">Mongolia</option>
+                                                                <option value="ME">Montenegro</option>
+                                                                <option value="MS">Montserrat</option>
+                                                                <option value="MA">Morocco</option>
+                                                                <option value="MZ">Mozambique</option>
+                                                                <option value="MM">Myanmar</option>
+                                                                <option value="NA">Namibia</option>
+                                                                <option value="NR">Nauru</option>
+                                                                <option value="NP">Nepal</option>
+                                                                <option value="NL">Netherlands</option>
+                                                                <option value="AN">Netherlands Antilles</option>
+                                                                <option value="NC">New Caledonia</option>
+                                                                <option value="NZ">New Zealand</option>
+                                                                <option value="NI">Nicaragua</option>
+                                                                <option value="NE">Niger</option>
+                                                                <option value="NG">Nigeria</option>
+                                                                <option value="NU">Niue</option>
+                                                                <option value="NF">Norfolk Island</option>
+                                                                <option value="MP">Northern Mariana Islands</option>
+                                                                <option value="NO">Norway</option>
+                                                                <option value="OM">Oman</option>
+                                                                <option value="PK">Pakistan</option>
+                                                                <option value="PW">Palau</option>
+                                                                <option value="PS">Palestinian Territory, Occupied</option>
+                                                                <option value="PA">Panama</option>
+                                                                <option value="PG">Papua New Guinea</option>
+                                                                <option value="PY">Paraguay</option>
+                                                                <option value="PE">Peru</option>
+                                                                <option value="PH">Philippines</option>
+                                                                <option value="PN">Pitcairn</option>
+                                                                <option value="PL">Poland</option>
+                                                                <option value="PT">Portugal</option>
+                                                                <option value="PR">Puerto Rico</option>
+                                                                <option value="QA">Qatar</option>
+                                                                <option value="RE">Reunion</option>
+                                                                <option value="RO">Romania</option>
+                                                                <option value="RU">Russian Federation</option>
+                                                                <option value="RW">Rwanda</option>
+                                                                <option value="SH">Saint Helena</option>
+                                                                <option value="KN">Saint Kitts and Nevis</option>
+                                                                <option value="LC">Saint Lucia</option>
+                                                                <option value="PM">Saint Pierre and Miquelon</option>
+                                                                <option value="VC">Saint Vincent and The Grenadines</option>
+                                                                <option value="WS">Samoa</option>
+                                                                <option value="SM">San Marino</option>
+                                                                <option value="ST">Sao Tome and Principe</option>
+                                                                <option value="SA">Saudi Arabia</option>
+                                                                <option value="SN">Senegal</option>
+                                                                <option value="RS">Serbia</option>
+                                                                <option value="SC">Seychelles</option>
+                                                                <option value="SL">Sierra Leone</option>
+                                                                <option value="SG">Singapore</option>
+                                                                <option value="SK">Slovakia</option>
+                                                                <option value="SI">Slovenia</option>
+                                                                <option value="SB">Solomon Islands</option>
+                                                                <option value="SO">Somalia</option>
+                                                                <option value="ZA">South Africa</option>
+                                                                <option value="GS">South Georgia and The South Sandwich Islands</option>
+                                                                <option value="ES">Spain</option>
+                                                                <option value="LK">Sri Lanka</option>
+                                                                <option value="SD">Sudan</option>
+                                                                <option value="SR">Suriname</option>
+                                                                <option value="SJ">Svalbard and Jan Mayen</option>
+                                                                <option value="SZ">Swaziland</option>
+                                                                <option value="SE">Sweden</option>
+                                                                <option value="CH">Switzerland</option>
+                                                                <option value="SY">Syrian Arab Republic</option>
+                                                                <option value="TW">Taiwan, Province of China</option>
+                                                                <option value="TJ">Tajikistan</option>
+                                                                <option value="TZ">Tanzania, United Republic of</option>
+                                                                <option value="TH">Thailand</option>
+                                                                <option value="TL">Timor-leste</option>
+                                                                <option value="TG">Togo</option>
+                                                                <option value="TK">Tokelau</option>
+                                                                <option value="TO">Tonga</option>
+                                                                <option value="TT">Trinidad and Tobago</option>
+                                                                <option value="TN">Tunisia</option>
+                                                                <option value="TR">Turkey</option>
+                                                                <option value="TM">Turkmenistan</option>
+                                                                <option value="TC">Turks and Caicos Islands</option>
+                                                                <option value="TV">Tuvalu</option>
+                                                                <option value="UG">Uganda</option>
+                                                                <option value="UA">Ukraine</option>
+                                                                <option value="AE">United Arab Emirates</option>
+                                                                <option value="GB">United Kingdom</option>
+                                                                <option value="US">United States</option>
+                                                                <option value="UM">United States Minor Outlying Islands</option>
+                                                                <option value="UY">Uruguay</option>
+                                                                <option value="UZ">Uzbekistan</option>
+                                                                <option value="VU">Vanuatu</option>
+                                                                <option value="VE">Venezuela</option>
+                                                                <option value="VN">Viet Nam</option>
+                                                                <option value="VG">Virgin Islands, British</option>
+                                                                <option value="VI">Virgin Islands, U.S.</option>
+                                                                <option value="WF">Wallis and Futuna</option>
+                                                                <option value="EH">Western Sahara</option>
+                                                                <option value="YE">Yemen</option>
+                                                                <option value="ZM">Zambia</option>
+                                                                <option value="ZW">Zimbabwe</option>
+                                                            </select>
+                                                        </div>
+    
+    
+    
+                                    </div>
+    
+                                    
+                                    <p> Form crearAlbumForm Status: {{ crearAlbumForm.status }} (PODRIA SER UNA BOTONSITO ROJO MIENTRAS ESTA INVALID Y VERDE CUANDO ESTA VALID)</p>
+    
+                                    <div class="row">
+                                      <div class="float-left">
+                                      <a routerLink="/albumList" class="btn col-lg-4" rel="cancel">Cancelar</a>
+                                       </div>
+                                      <div class="">
+                                        <button type="submit" [disabled]="!crearAlbumForm.valid" class="btn btn-primary btn-lg " (click)="onSubmit()">Confirmar y Cargar tracks</button>
+                                        <p>si el formulario esta bien al hacer click limpia la pantalla y nos lleva a una nueva pantalla (Paso 2/3) Carga de tracks (mira como deje el track-list-add) donde seleccionamos el numero de tracks y los cargamos. <br> Desde ahí podemos volver a AlbumCrear para modificar o pasar a la seleccion de tiendas (Paso 3/3)</p>
+                                     <!-- <button class="btn btn-outline-secondary calendar" (click)="grabaFormulario()" type="button">grabaFormulario</button> -->
+                                     </div>
+                                   </div>
+                  </form>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- /////////// -->
+    
+    
+    <!-- <div class="container"> -->
+        <div  *ngIf="album.id" >
+          <!--   <form accept-charset="UTF-8" action="https://beta.dashgo.com/juan/media/album_update/45093" class="edit_album" data-remote="true" enctype="multipart/form-data" id="edit_album_45093" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="heiUj/U94qXvi4ZU6UO7QNWdEyReYiW9iUEKF9lP6QI=" /></div> -->
+    
+    <!-- </form> -->
+    
+      <h1> List of Tracks</h1>
+            <div class="item-block col-lg-12 col-md-12 sidebar-wrapper">
+                <div class="item">
+                        <table class="table table-condensed table-custom" id="track-wrapper-box">
+                          <thead>
+                            <th width="10%">Disk #</th> <!-- width="20%" -->
+                            <th width="10%">Track #</th> <!-- width="20%" -->
+                            <th>Title</th>
+                          </thead>
+                          <tbody>
+                              <tr  *ngFor="let item of AlbumTracks" >
+                                  <td>{{item.disc_number}}</td>
+                                  <td>{{item.position}}</td>
+                                  <td>{{item.title}}</td>
+      <td>    <button class="btn btn-info  mr-sm-2" (click)="modificarTrack(item)">Edit</button>   </td>
+                              </tr>
+                          </tbody>
+                        </table>
+    
+        <div >
+    
+            <button  class="btn btn-info pull-right"  (click)="addTrack(album)"  > Add Tracks</button>
+        </div>
+    
+         <div class=" row">
+            <div class="col-md-3">
+               <label> Disc Number </label>
+    
+                 <select class="form-control selectpicker" id="disckNumber" [(ngModel)]="disckNumber">
+    
+                    <option selected="selected" value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+    
+                   </select>
+            </div>
+            <div class="col-md-3">
+               <label> Tracks Number </label>
+    
+                 <select class="form-control selectpicker" id="traksNumber" [(ngModel)]="traksNumber">
+    
+                    <option selected="selected" value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+    
+    
+                   </select>
+            </div>
+             <div class="col-md-3 d-flex align-items-end ">
+            <button  class="btn btn-info mt-auto  " (click)="addTrackList(album,disckNumber,traksNumber)"  >Add List of Tracks</button>
+          </div>
+        </div>
+    
+    
+    
+                </div>
+    
+                <div class="item-hr clear"><hr class="dark-hr" /></div>
+    
+    <!--             <div class="item">
+        <h2 class="quick-links-heading">Need Help?</h2>
+        <hr />
+        <i class="hint">
+            <p>Click on any of the <a href="#" class="help-small"></a> icons for more information on any requirement.</p>
+        </i>
+    </div> -->
+            </div>
+        </div>
+    
+    
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    
+    
+    <!-- Submited successfully-->
+    
+    <div [hidden]="!submitted">
+    
+     <ngb-alert [type]="'success'" [dismissible]="false"  ><!-- [hidden]="!error"  -->
+        <strong>You submitted successfully!!</strong><p>{{submittedMensage}}</p>
+      </ngb-alert>
+    </div>
+    
+    <!-- Display de un error -->
+      <p>
+      <ngb-alert [type]="'danger'"  [dismissible]="false" *ngIf="error"  ><!-- [hidden]="!error"  -->
+        <strong>Warning!</strong><p>{{error}}</p>
+      </ngb-alert>
+    </p>

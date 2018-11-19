@@ -17,6 +17,16 @@ import { TrackListComponent } from './track/track-list/track-list.component';
 import { TrackCrearComponent } from './track/track-crear/track-crear.component';
 import { TrackObjectComponent } from './track/track-object/track-object.component';
 import { TrackListAddComponent } from './track/track-list-add/track-list-add.component';
+import { NewuserComponent } from './newuser/newuser.component';
+import { MicuentaComponent } from './micuenta/micuenta.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { ProductsComponent } from './products/products.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { NewreleaseInfoComponent } from './newrelease-info/newrelease-info.component';
+import { NewreleaseTracksComponent } from './newrelease-tracks/newrelease-tracks.component';
+import { NewreleaseDistComponent } from './newrelease-dist/newrelease-dist.component';
+
 
 const routes: Routes = [
 { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -36,6 +46,24 @@ const routes: Routes = [
   { path: 'trackCrear', component: TrackCrearComponent },
   { path: 'trackObject', component: TrackObjectComponent },
   { path: 'tracklistadd', component: TrackListAddComponent},
+  { path: 'newuser', component: NewuserComponent},
+  { path: 'micuenta', component: MicuentaComponent},
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'userdetails', component: UserdetailsComponent},
+  { path: 'products', component: ProductsComponent},
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'newrelease-info', component: NewreleaseInfoComponent},
+  { path: 'newrelease-tracks', component: NewreleaseTracksComponent},
+  { path: 'newrelease-dist', component: NewreleaseDistComponent},
+
+
+
+
+
+
+
+
+
   // ,
   // { path: 'datos', component: DatosComponent },
 

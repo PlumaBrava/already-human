@@ -11,6 +11,8 @@ import { environment } from '../environments/environment';
 import { LaflotaComponent } from './laflota/laflota.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbdButtonsCheckbox } from './buttons-checkbox';
+
 
 
 
@@ -43,6 +45,17 @@ import { TrackCrearComponent } from './track/track-crear/track-crear.component';
 
 import { TrackObjectComponent } from './track/track-object/track-object.component';
 import { TrackListAddComponent } from './track/track-list-add/track-list-add.component';
+import { NewuserComponent } from './newuser/newuser.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { ProductsComponent } from './products/products.component';
+import { MicuentaComponent } from './micuenta/micuenta.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { NewreleaseComponent } from './newrelease/newrelease.component';
+import { NewreleaseInfoComponent } from './newrelease-info/newrelease-info.component';
+import { NewreleaseTracksComponent } from './newrelease-tracks/newrelease-tracks.component';
+import { NewreleasePublishComponent } from './newrelease-publish/newrelease-publish.component';
+import { NewreleaseDistComponent } from './newrelease-dist/newrelease-dist.component';
 
 
 
@@ -68,11 +81,21 @@ import { TrackListAddComponent } from './track/track-list-add/track-list-add.com
     PublishAlbumComponent,
     TrackListComponent,
     TrackCrearComponent,
-
     TrackObjectComponent,
-
-    TrackListAddComponent
-
+    NgbdButtonsCheckbox,
+    TrackListAddComponent,
+    NewuserComponent,
+    DashboardComponent,
+    UserdetailsComponent,
+    ProductsComponent,
+    MicuentaComponent,
+    CheckoutComponent,
+    NewreleaseComponent,
+    NewreleaseInfoComponent,
+    NewreleaseTracksComponent,
+    NewreleasePublishComponent,
+    NewreleaseDistComponent
+    
   ],
   imports: [
     BrowserModule,
